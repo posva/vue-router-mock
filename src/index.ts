@@ -1,10 +1,27 @@
 import { defineComponent, PropType, h } from 'vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+export { routeLocationKey, routerKey } from 'vue-router'
 
-/**
- * Returns true.
- */
-export function mylib() {
-  return true
+export function createMockedRouter() {
+  const router = createRouter({
+    history: createWebHashHistory(),
+    routes: [
+      {
+        path: '/:pathMatch(.*)*',
+        component: { render: () => null },
+      },
+    ],
+  })
+
+  router.push = jest.fn((to) => {
+    router.currentRoute.value = router.resolve(to)
+    // resolve pending navigation failure
+    return Promise.resolve()
+  })
+
+  // TODO: replace
+
+  return router
 }
 
 export const Component = defineComponent({
