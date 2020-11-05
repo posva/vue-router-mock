@@ -1,4 +1,4 @@
-import { mylib, ComponentImpl } from '../src'
+import { mylib, Component } from '../src'
 import { mount } from '@vue/test-utils'
 
 describe('mylib', () => {
@@ -9,7 +9,7 @@ describe('mylib', () => {
 
 describe('Component', () => {
   it('works', async () => {
-    const wrapper = mount(ComponentImpl, {
+    const wrapper = mount(Component, {
       props: { data: { title: 'hi', summary: 'summary' } },
     })
     expect(wrapper.html()).toMatchInlineSnapshot(

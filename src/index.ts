@@ -1,4 +1,4 @@
-import { defineComponent, PropType, VNodeProps, h } from 'vue'
+import { defineComponent, PropType, h } from 'vue'
 
 /**
  * Returns true.
@@ -7,17 +7,12 @@ export function mylib() {
   return true
 }
 
-export interface ComponentProps {
-  custom?: boolean
-  data: { title: string; summary: string }
-}
-
-export const ComponentImpl = defineComponent({
+export const Component = defineComponent({
   props: {
-    custom: Boolean,
+    custom: Boolean as PropType<boolean>,
     data: {
       required: true,
-      type: Object as PropType<ComponentProps['data']>,
+      type: Object as PropType<{ title: string; summary: string }>,
     },
   },
 
@@ -29,14 +24,3 @@ export const ComponentImpl = defineComponent({
       )
   },
 })
-
-// export the public type for h/tsx inference
-// also to avoid inline import() in generated d.ts files
-/**
- * Component of vue-lib.
- */
-export const Component = (ComponentImpl as any) as {
-  new (): {
-    $props: VNodeProps & ComponentProps
-  }
-}
