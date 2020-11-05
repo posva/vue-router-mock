@@ -1,4 +1,4 @@
-# vue-lib [![Build Status](https://badgen.net/circleci/github/posva/vue-lib/master)](https://circleci.com/gh/posva/vue-lib) [![npm package](https://badgen.net/npm/v/vue-lib)](https://www.npmjs.com/package/vue-lib) [![coverage](https://badgen.net/codecov/c/github/posva/vue-lib/master)](https://codecov.io/github/posva/vue-lib) [![thanks](https://badgen.net/badge/thanks/♥/pink)](https://github.com/posva/thanks)
+# vue-router-mock [![Build Status](https://badgen.net/circleci/github/posva/vue-router-mock/master)](https://circleci.com/gh/posva/vue-router-mock) [![npm package](https://badgen.net/npm/v/vue-router-mock)](https://www.npmjs.com/package/vue-router-mock) [![coverage](https://badgen.net/codecov/c/github/posva/vue-router-mock/master)](https://codecov.io/github/posva/vue-router-mock) [![thanks](https://badgen.net/badge/thanks/♥/pink)](https://github.com/posva/thanks)
 
 > Some awesome description
 
@@ -19,13 +19,13 @@ degit posva/vue-ts-lib
 #### Rename the project
 
 ```sh
-sed -i '' 's/vue-lib/vue-global-events/g' README.md package.json .github/workflows/release-tag.yml size-checks/*
+sed -i '' 's/vue-router-mock/vue-global-events/g' README.md package.json .github/workflows/release-tag.yml size-checks/*
 ```
 
 #### Circle CI
 
 - Add the project: https://circleci.com/projects/gh/posva
-- Check _Build on forked pull requests_: https://circleci.com/gh/posva/vue-lib/edit#advanced-settings
+- Check _Build on forked pull requests_: https://circleci.com/gh/posva/vue-router-mock/edit#advanced-settings
 - Check _Auto cancel redundant build_ (same place)
 
 ## Dependabot
@@ -44,9 +44,9 @@ Remove the section _Checklist_ before releasing.
 ## Installation
 
 ```sh
-yarn add vue-lib
+yarn add vue-router-mock
 # or
-npm install vue-lib
+npm install vue-router-mock
 ```
 
 ## Usage
