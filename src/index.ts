@@ -1,6 +1,18 @@
-import { defineComponent, PropType, h } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
-export { routeLocationKey, routerKey } from 'vue-router'
+import { config, VueWrapper } from '@vue/test-utils'
+
+export function routerMockPlugin(wrapper: VueWrapper<any>) {
+  const router = createMockedRouter()
+
+  // TODO: remove in next test utils release
+  config.global.plugins = config.global.plugins || []
+  config.global.plugins.push(router)
+  console.log('hey')
+  // config.global.provide![routerKey as any] = router
+  // config.global.provide![routeLocationKey as any] =
+
+  return {}
+}
 
 export function createMockedRouter() {
   const router = createRouter({
@@ -23,21 +35,3 @@ export function createMockedRouter() {
 
   return router
 }
-
-export const Component = defineComponent({
-  props: {
-    custom: Boolean as PropType<boolean>,
-    data: {
-      required: true,
-      type: Object as PropType<{ title: string; summary: string }>,
-    },
-  },
-
-  setup(props) {
-    return () =>
-      h(
-        'p',
-        `Custom: ${props.custom}. ${props.data.title} - ${props.data.summary}.`
-      )
-  },
-})

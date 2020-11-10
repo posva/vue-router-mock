@@ -1,4 +1,3 @@
-import { routeLocationKey, routerKey } from '../src'
 import { config, mount } from '@vue/test-utils'
 import Test from './fixtures/Test'
 import { RouterLink } from 'vue-router'
@@ -28,8 +27,10 @@ describe('Component', () => {
     config.global.provide = { foo: 'foo' }
     // shouldn't this be always present for convenience?
     // record string is not enough
-    config.global.provide![routerKey as any] = routerMock
-    config.global.provide![routeLocationKey as any] = routeMock
+    // config.global.provide![routerKey as any] = routerMock
+    // config.global.provide![routeLocationKey as any] = routeMock
+
+    // config.global.mocks.
   })
 
   it('works', async () => {
@@ -37,6 +38,16 @@ describe('Component', () => {
       // initial location
       // route: '/',
       // router: false,
+      // global: {
+      //   mocks: {
+      //     $router: routerMock,
+      //     $route: routeMock,
+      //   },
+      //   provide: {
+      //     [routerKey as symbol]: routerMock,
+      //     [routeLocationKey as symbol]: routeMock,
+      //   },
+      // },
     })
 
     // await wrapper.pendingNavigation()
