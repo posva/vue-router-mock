@@ -5,7 +5,6 @@ import {
   RouteLocationNormalizedLoaded,
   Router,
   routerKey,
-  START_LOCATION,
 } from 'vue-router'
 import { config, VueWrapper } from '@vue/test-utils'
 import { computed, ComputedRef, reactive, Ref } from 'vue'
@@ -50,10 +49,16 @@ export function createMockedRouter() {
     ],
   })
 
-  router.push = jest.fn((to) => {
+  const pushMock = jest.fn((to) => {
     router.currentRoute.value = router.resolve(to)
     // resolve pending navigation failure
     return Promise.resolve()
+  })
+
+  router.push = pushMock
+
+  beforeEach(() => {
+    pushMock.mockClear()
   })
 
   // TODO: replace
