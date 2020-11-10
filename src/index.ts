@@ -1,7 +1,6 @@
 import {
   createRouter,
   createWebHashHistory,
-  isNavigationFailure,
   routeLocationKey,
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
@@ -46,14 +45,14 @@ export function createMockedRouter() {
     ],
   })
 
+  const { push } = router
+
   const pushMock = jest.fn((to) => {
-    router.currentRoute.value = router.resolve(to)
-    return consumeNavigationFailure()
+    return consumeNextReturn(to)
   })
 
   const replaceMock = jest.fn((to) => {
-    router.currentRoute.value = router.resolve(to)
-    return consumeNavigationFailure()
+    return consumeNextReturn({ ...to, replace: true })
   })
 
   router.push = pushMock
@@ -64,33 +63,45 @@ export function createMockedRouter() {
     replaceMock.mockClear()
   })
 
-  let nextFailure: Error | boolean | RouteLocationRaw | undefined = undefined
+  let nextReturn: Error | boolean | RouteLocationRaw | undefined = undefined
 
-  function failNextNavigation(
-    failure: Error | boolean | RouteLocationRaw | undefined
+  function setNextGuardReturn(
+    returnValue: Error | boolean | RouteLocationRaw | undefined
   ) {
-    nextFailure = failure
+    nextReturn = returnValue
   }
 
-  function consumeNavigationFailure() {
-    let p: Promise<any> = Promise.resolve()
-
-    if (nextFailure) {
-      if (isNavigationFailure(nextFailure)) {
-        p = Promise.resolve(nextFailure)
-      } else {
-        p = Promise.reject(nextFailure)
-      }
+  function consumeNextReturn(to: RouteLocationRaw) {
+    if (nextReturn != null) {
+      const removeGuard = router.beforeEach(() => {
+        const value = nextReturn
+        removeGuard()
+        nextReturn = undefined
+        return value
+      })
+      pendingNavigation = push(to)
+      pendingNavigation
+        .catch(() => {})
+        .finally(() => {
+          pendingNavigation = undefined
+        })
+      return pendingNavigation
     }
 
-    nextFailure = undefined
+    // NOTE: should we trigger a push to reset the internal pending navigation of the router?
+    router.currentRoute.value = router.resolve(to)
+    return Promise.resolve()
+  }
 
-    return p
+  let pendingNavigation: ReturnType<typeof push> | undefined
+  function getPendingNavigation() {
+    return pendingNavigation || Promise.resolve()
   }
 
   return {
     ...router,
-    failNextNavigation,
+    setNextGuardReturn,
+    getPendingNavigation,
   }
 }
 
