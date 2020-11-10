@@ -3,8 +3,8 @@ import { addGlobalInjections, createMockedRouter } from '../src'
 import Test from './fixtures/Test'
 
 describe('Navigations', () => {
+  const router = createMockedRouter()
   beforeAll(() => {
-    const router = createMockedRouter()
     addGlobalInjections(router)
   })
 
@@ -26,6 +26,20 @@ describe('Navigations', () => {
 
   it('reset calls between tests', async () => {
     const wrapper = mount(Test)
+    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(0)
+  })
+
+  it('rejects next navigation with an error', async () => {
+    const wrapper = mount(Test)
+    const error = new Error('fail')
+    router.failNextNavigation(error)
+    await expect(wrapper.vm.$router.push('/foo')).rejects.toBe(error)
+  })
+
+  it('can abort the next navigation', async () => {
+    const wrapper = mount(Test)
+    const error = new Error('fail')
+    router.failNextNavigation(error)
     expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(0)
   })
 })

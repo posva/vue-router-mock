@@ -1,23 +1,20 @@
 import {
   createRouter,
   createWebHashHistory,
+  isNavigationFailure,
   routeLocationKey,
   RouteLocationNormalizedLoaded,
+  RouteLocationRaw,
   Router,
   routerKey,
 } from 'vue-router'
 import { config, VueWrapper } from '@vue/test-utils'
 import { computed, ComputedRef, reactive, Ref } from 'vue'
 
-export function routerMockPlugin(wrapper: VueWrapper<any>) {
-  const router = createMockedRouter()
-
-  // console.log('plugins', config.global.plugins)
-  // config.global.plugins.push(router)
-  console.log('hey')
-
-  addGlobalInjections(router)
-
+export function routerMockPlugin(
+  wrapper: VueWrapper<any>,
+  { router }: { router: Router }
+) {
   return {}
 }
 
@@ -51,14 +48,12 @@ export function createMockedRouter() {
 
   const pushMock = jest.fn((to) => {
     router.currentRoute.value = router.resolve(to)
-    // resolve pending navigation failure
-    return Promise.resolve()
+    return consumeNavigationFailure()
   })
 
   const replaceMock = jest.fn((to) => {
     router.currentRoute.value = router.resolve(to)
-    // resolve pending navigation failure
-    return Promise.resolve()
+    return consumeNavigationFailure()
   })
 
   router.push = pushMock
@@ -69,7 +64,34 @@ export function createMockedRouter() {
     replaceMock.mockClear()
   })
 
-  return router
+  let nextFailure: Error | boolean | RouteLocationRaw | undefined = undefined
+
+  function failNextNavigation(
+    failure: Error | boolean | RouteLocationRaw | undefined
+  ) {
+    nextFailure = failure
+  }
+
+  function consumeNavigationFailure() {
+    let p: Promise<any> = Promise.resolve()
+
+    if (nextFailure) {
+      if (isNavigationFailure(nextFailure)) {
+        p = Promise.resolve(nextFailure)
+      } else {
+        p = Promise.reject(nextFailure)
+      }
+    }
+
+    nextFailure = undefined
+
+    return p
+  }
+
+  return {
+    ...router,
+    failNextNavigation,
+  }
 }
 
 function createReactiveRouteLocation(
