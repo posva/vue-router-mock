@@ -55,13 +55,19 @@ export function createMockedRouter() {
     return Promise.resolve()
   })
 
+  const replaceMock = jest.fn((to) => {
+    router.currentRoute.value = router.resolve(to)
+    // resolve pending navigation failure
+    return Promise.resolve()
+  })
+
   router.push = pushMock
+  router.replace = replaceMock
 
   beforeEach(() => {
     pushMock.mockClear()
+    replaceMock.mockClear()
   })
-
-  // TODO: replace
 
   return router
 }
