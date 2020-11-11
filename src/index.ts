@@ -1,11 +1,13 @@
 import {
+  createMemoryHistory,
   createRouter,
-  createWebHashHistory,
   routeLocationKey,
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
   routerKey,
+  RouterLink,
+  RouterView,
 } from 'vue-router'
 import { config, VueWrapper } from '@vue/test-utils'
 import { computed, ComputedRef, reactive, Ref } from 'vue'
@@ -28,15 +30,36 @@ export function addGlobalInjections(router: Router) {
   config.global.mocks.$router = router
   config.global.mocks.$route = route
 
+  config.global.components.RouterView = RouterView
+  config.global.components.RouterLink = RouterLink
+
   config.global.stubs.RouterLink = true
   config.global.stubs.RouterView = true
 
   return { router, route }
 }
 
-export function createMockedRouter() {
+export interface RouterMock extends Router {
+  /**
+   * Set a value to be returned on a navigation guard for the next navigation.
+   *
+   * @param returnValue value that will be returned on a simulated navigation
+   * guard
+   */
+  setNextGuardReturn(
+    returnValue: Error | boolean | RouteLocationRaw | undefined
+  ): void
+
+  /**
+   * Returns a Promise of the pending navigation. Resolves right away if there
+   * isn't any.
+   */
+  getPendingNavigation(): ReturnType<Router['push']>
+}
+
+export function createMockedRouter(): RouterMock {
   const router = createRouter({
-    history: createWebHashHistory(),
+    history: createMemoryHistory(),
     routes: [
       {
         path: '/:pathMatch(.*)*',
