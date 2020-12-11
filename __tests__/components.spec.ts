@@ -1,10 +1,9 @@
 import { mount } from '@vue/test-utils'
-import { injectRouterMock, createRouterMock } from '../src'
+import { injectRouterMock } from '../src'
 
 describe('components', () => {
   beforeAll(() => {
-    const router = createRouterMock()
-    injectRouterMock(router)
+    injectRouterMock()
   })
 
   it('stubs router link', async () => {

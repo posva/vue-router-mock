@@ -1,12 +1,11 @@
 import { mount } from '@vue/test-utils'
 import { START_LOCATION } from 'vue-router'
-import { injectRouterMock, createRouterMock } from '../src'
+import { injectRouterMock } from '../src'
 import Test from './fixtures/Test'
 
 describe('Route location', () => {
   beforeAll(() => {
-    const router = createRouterMock()
-    injectRouterMock(router)
+    injectRouterMock()
   })
 
   it('creates router properties', async () => {

@@ -41,14 +41,6 @@ const outputConfigs = {
     file: pkg.main,
     format: `cjs`,
   },
-  global: {
-    file: pkg.unpkg,
-    format: `iife`,
-  },
-  esm: {
-    file: pkg.browser || pkg.module.replace('-bundler.js', '-browser.js'),
-    format: `es`,
-  },
 }
 
 const allFormats = Object.keys(outputConfigs)
@@ -56,15 +48,6 @@ const packageFormats = allFormats
 const packageConfigs = packageFormats.map((format) =>
   createConfig(format, outputConfigs[format])
 )
-
-// only add the production ready if we are bundling the options
-packageFormats.forEach((format) => {
-  if (format === 'cjs') {
-    packageConfigs.push(createProductionConfig(format))
-  } else if (format === 'global') {
-    packageConfigs.push(createMinifiedConfig(format))
-  }
-})
 
 export default packageConfigs
 
@@ -107,7 +90,7 @@ function createConfig(format, output, plugins = []) {
   // during a single build.
   hasTSChecked = true
 
-  const external = ['vue']
+  const external = ['vue', 'vue-router', '@vue/test-utils']
 
   const nodePlugins = [resolve(), commonjs()]
 
