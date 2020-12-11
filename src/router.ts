@@ -12,7 +12,7 @@ export interface RouterMock extends Router {
   /**
    * Set a value to be returned on a navigation guard for the next navigation.
    *
-   * @param returnValue value that will be returned on a simulated navigation
+   * @param returnValue - value that will be returned on a simulated navigation
    * guard
    */
   setNextGuardReturn(

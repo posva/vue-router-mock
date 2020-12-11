@@ -9,11 +9,13 @@ import {
 import { config } from '@vue/test-utils'
 import { createReactiveRouteLocation } from './routeLocation'
 import { createRouterMock, RouterMock } from './router'
+// @ts-ignore: for api-extractor
+import { Ref } from 'vue'
 
 /**
  * Inject global variables, overriding any previously inject router mock
  *
- * @param router router mock to inject
+ * @param router - router mock to inject
  */
 export function injectRouterMock(router?: RouterMock) {
   router = router || createRouterMock()
@@ -41,7 +43,7 @@ export function injectRouterMock(router?: RouterMock) {
  * Creates an object of properties to be provided at your application level to
  * mock what is injected by vue-router
  *
- * @param router router mock instance
+ * @param router - router mock instance
  */
 export function createProvide(router: RouterMock) {
   const route = createReactiveRouteLocation(router.currentRoute)
