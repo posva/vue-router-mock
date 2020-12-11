@@ -1,5 +1,6 @@
 import {
   routeLocationKey,
+  RouteLocationNormalizedLoaded,
   routerKey,
   RouterLink,
   RouterView,
@@ -7,21 +8,22 @@ import {
 } from 'vue-router'
 import { config } from '@vue/test-utils'
 import { createReactiveRouteLocation } from './routeLocation'
-import { RouterMock } from './router'
+import { createRouterMock, RouterMock } from './router'
 
 /**
  * Inject global variables, overriding any previously inject router mock
  *
  * @param router router mock to inject
  */
-export function injectRouterMock(router: RouterMock) {
-  const route = createReactiveRouteLocation(router.currentRoute)
+export function injectRouterMock(router?: RouterMock) {
+  router = router || createRouterMock()
 
-  config.global.provide[routerKey as any] = router
-  config.global.provide[routeLocationKey as any] = route
-  config.global.provide[routerViewLocationKey as any] = router.currentRoute
+  const provides = createProvide(router)
+  const route = provides[
+    routeLocationKey as any
+  ] as RouteLocationNormalizedLoaded
 
-  // console.log({ route })
+  Object.assign(config.global.provide, provides)
 
   config.global.mocks.$router = router
   config.global.mocks.$route = route
@@ -33,4 +35,20 @@ export function injectRouterMock(router: RouterMock) {
   config.global.stubs.RouterView = true
 
   return { router, route }
+}
+
+/**
+ * Creates an object of properties to be provided at your application level to
+ * mock what is injected by vue-router
+ *
+ * @param router router mock instance
+ */
+export function createProvide(router: RouterMock) {
+  const route = createReactiveRouteLocation(router.currentRoute)
+
+  return {
+    [routerKey as any]: router,
+    [routeLocationKey as any]: route,
+    [routerViewLocationKey as any]: router.currentRoute,
+  }
 }
