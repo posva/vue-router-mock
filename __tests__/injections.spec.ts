@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
 import { useRoute, useRouter } from 'vue-router'
-import { addGlobalInjections, createMockedRouter } from '../src'
+import { injectRouterMock, createRouterMock } from '../src'
 
 describe('Injections', () => {
-  const router = createMockedRouter()
+  const router = createRouterMock()
   beforeAll(() => {
-    addGlobalInjections(router)
+    injectRouterMock(router)
   })
 
   it('injects the router instance', async () => {

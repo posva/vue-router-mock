@@ -1,2 +1,2 @@
-export { injectRouterMock as addGlobalInjections } from './injections'
-export { RouterMock, createMockedRouter } from './router'
+export { injectRouterMock } from './injections'
+export { RouterMock, createRouterMock } from './router'

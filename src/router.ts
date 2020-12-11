@@ -5,6 +5,9 @@ import {
   Router,
 } from 'vue-router'
 
+/**
+ * Router Mock instance
+ */
 export interface RouterMock extends Router {
   /**
    * Set a value to be returned on a navigation guard for the next navigation.
@@ -26,7 +29,7 @@ export interface RouterMock extends Router {
 /**
  * Creates a router mock instance
  */
-export function createMockedRouter(): RouterMock {
+export function createRouterMock(): RouterMock {
   const router = createRouter({
     history: createMemoryHistory(),
     routes: [

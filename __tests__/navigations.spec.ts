@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils'
 import { NavigationFailureType } from 'vue-router'
-import { addGlobalInjections, createMockedRouter } from '../src'
+import { injectRouterMock, createRouterMock } from '../src'
 import Test from './fixtures/Test'
 
 describe('Navigations', () => {
-  const router = createMockedRouter()
+  const router = createRouterMock()
   beforeAll(() => {
-    addGlobalInjections(router)
+    injectRouterMock(router)
   })
 
   it('can check calls on push', async () => {
