@@ -24,6 +24,8 @@ export function addGlobalInjections(router: Router) {
 
   config.global.provide[routerKey as any] = router
   config.global.provide[routeLocationKey as any] = route
+  // TODO: add on next release
+  // config.global.provide[routerViewLocationKey as any] = route.currentRoute
 
   // console.log({ route })
 
