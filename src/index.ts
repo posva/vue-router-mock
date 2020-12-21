@@ -1,5 +1,5 @@
 export { injectRouterMock, createProvide } from './injections'
-export { RouterMock, createRouterMock } from './router'
+export { RouterMock, createRouterMock, EmptyView } from './router'
 
 // TODO: find how to do
 // import { RouterMock } from './router'

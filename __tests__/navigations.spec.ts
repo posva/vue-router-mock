@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
 import { NavigationFailureType } from 'vue-router'
-import { injectRouterMock, createRouterMock } from '../src'
+import { injectRouterMock, createRouterMock, EmptyView } from '../src'
 import Test from './fixtures/Test'
 
 describe('Navigations', () => {
   const router = createRouterMock()
-  beforeAll(() => {
+  beforeEach(() => {
     injectRouterMock(router)
   })
 
@@ -42,6 +42,21 @@ describe('Navigations', () => {
     router.setNextGuardReturn(false)
     await expect(wrapper.vm.$router.push('/foo')).resolves.toMatchObject({
       type: NavigationFailureType.aborted,
+    })
+  })
+
+  describe('per-router guards', () => {
+    it('can ignore them', async () => {
+      const beforeEnter = jest.fn()
+      const router = createRouterMock({ runInComponentGuards: false })
+      injectRouterMock(router)
+      router.addRoute({ path: '/foo', beforeEnter, component: EmptyView })
+
+      mount(Test)
+      router.setNextGuardReturn(true)
+      router.push('/foo')
+      await router.getPendingNavigation()
+      expect(beforeEnter).not.toHaveBeenCalled()
     })
   })
 

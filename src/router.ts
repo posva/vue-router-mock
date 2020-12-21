@@ -1,3 +1,4 @@
+import { Component } from 'vue'
 import {
   createMemoryHistory,
   createRouter,
@@ -6,6 +7,11 @@ import {
   RouteRecordRaw,
   START_LOCATION,
 } from 'vue-router'
+
+export const EmptyView: Component = {
+  name: 'RouterMockEmptyView',
+  render: () => null,
+}
 
 /**
  * Router Mock instance
@@ -34,7 +40,6 @@ export interface RouterMock extends Router {
  * Creates a router mock instance
  */
 export function createRouterMock({
-  // TODO: test
   /**
    * Override the starting location before each test. Defaults to
    * START_LOCATION.
@@ -54,7 +59,7 @@ export function createRouterMock({
     routes: [
       {
         path: '/:pathMatch(.*)*',
-        component: { render: () => null },
+        component: EmptyView,
       },
     ],
   })

@@ -3,6 +3,10 @@ import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'Test',
+  props: {
+    leaveGuard: Function,
+    updateGuard: Function,
+  },
 
   setup() {
     const route = useRoute()
