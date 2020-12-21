@@ -9,13 +9,15 @@ describe('Injections', () => {
   })
 
   it('injects the router instance', async () => {
-    mount({
+    const wrapper = mount({
       render: () => null,
       setup() {
         const r = useRouter()
         expect(r).toBe(router)
       },
     })
+
+    expect(wrapper.vm.$router).toBe(router)
   })
 
   it('injects the current route', async () => {
@@ -27,6 +29,7 @@ describe('Injections', () => {
       },
     })
 
+    expect(wrapper.vm.$route).toBe(wrapper.vm.r)
     expect(wrapper.vm.r).toMatchObject({ fullPath: '/' })
 
     await router.push('/bar')
