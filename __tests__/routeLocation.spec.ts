@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { START_LOCATION } from 'vue-router'
-import { injectRouterMock } from '../src'
+import { createRouterMock, injectRouterMock } from '../src'
 import Test from './fixtures/Test'
 
 describe('Route location', () => {
@@ -15,21 +14,33 @@ describe('Route location', () => {
     expect(wrapper.vm.$route).toBeDefined()
   })
 
-  it('initializes the route to START_LOCATION', async () => {
-    const wrapper = mount(Test)
-
-    expect(wrapper.vm.$route).toEqual(START_LOCATION)
-  })
-
   it('can change the current location when pushing', async () => {
     const wrapper = mount(Test)
 
     wrapper.vm.$router.push('/hi?q=query#hash')
+    wrapper.vm.$router
 
     expect(wrapper.vm.$route).toMatchObject({
       path: '/hi',
       query: { q: 'query' },
       hash: '#hash',
+    })
+  })
+
+  describe('different initialLocation', () => {
+    const router = createRouterMock({
+      initialLocation: '/foo#bar',
+    })
+
+    beforeEach(async () => {
+      injectRouterMock(router)
+    })
+
+    it('initializes the route to the initialLocation', async () => {
+      const wrapper = mount(Test)
+
+      expect(wrapper.vm.$route.path).toBe('/foo')
+      expect(wrapper.vm.$route.hash).toBe('#bar')
     })
   })
 })
