@@ -5,9 +5,9 @@
 ## Installation
 
 ```sh
-yarn add vue-router-mock@next
+yarn add vue-router-mock@4
 # or
-npm install vue-router-mock@next
+npm install vue-router-mock@2
 ```
 
 ## Usage
