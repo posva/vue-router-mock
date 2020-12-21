@@ -1,16 +1,29 @@
-import { defineComponent, h } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { defineComponent, getCurrentInstance, h, PropType } from 'vue'
+import {
+  NavigationGuard,
+  onBeforeRouteLeave,
+  onBeforeRouteUpdate,
+  useRoute,
+  useRouter,
+} from 'vue-router'
 
 export default defineComponent({
   name: 'Test',
   props: {
-    leaveGuard: Function,
-    updateGuard: Function,
+    leaveGuard: Function as PropType<NavigationGuard>,
+    updateGuard: Function as PropType<NavigationGuard>,
   },
 
-  setup() {
+  setup(props) {
     const route = useRoute()
     const router = useRouter()
+
+    if (props.leaveGuard) {
+      onBeforeRouteLeave(props.leaveGuard)
+    }
+    if (props.updateGuard) {
+      onBeforeRouteUpdate(props.updateGuard)
+    }
 
     return { route, router }
   },

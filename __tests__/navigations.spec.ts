@@ -46,17 +46,105 @@ describe('Navigations', () => {
   })
 
   describe('per-router guards', () => {
-    it('can ignore them', async () => {
+    it('ignored by default', async () => {
       const beforeEnter = jest.fn()
-      const router = createRouterMock({ runInComponentGuards: false })
+      const router = createRouterMock()
+      injectRouterMock(router)
+      router.addRoute({ path: '/foo', beforeEnter, component: EmptyView })
+
+      mount(Test)
+      await router.push('/foo')
+      expect(beforeEnter).not.toHaveBeenCalled()
+    })
+
+    it('ignore them with other setNextGuardReturn', async () => {
+      const beforeEnter = jest.fn()
+      const router = createRouterMock()
       injectRouterMock(router)
       router.addRoute({ path: '/foo', beforeEnter, component: EmptyView })
 
       mount(Test)
       router.setNextGuardReturn(true)
-      router.push('/foo')
-      await router.getPendingNavigation()
+      await router.push('/foo')
       expect(beforeEnter).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('in-component guards', () => {
+    it('ignores guards by default with no guard', async () => {
+      const router = createRouterMock()
+      injectRouterMock(router)
+      router.addRoute({ path: '/test', component: Test })
+      await router.push('/test')
+
+      const leaveGuard = jest.fn()
+      const updateGuard = jest.fn()
+
+      mount(Test, { props: { leaveGuard, updateGuard } })
+
+      await router.push('/test#two')
+      expect(updateGuard).not.toHaveBeenCalled()
+
+      await router.push('/foo')
+      expect(leaveGuard).not.toHaveBeenCalled()
+    })
+
+    it('ignores guards by default with a guard', async () => {
+      const router = createRouterMock()
+      injectRouterMock(router)
+      router.addRoute({ path: '/test', component: Test })
+      await router.push('/test')
+
+      const leaveGuard = jest.fn()
+      const updateGuard = jest.fn()
+
+      mount(Test, { props: { leaveGuard, updateGuard } })
+
+      router.setNextGuardReturn(true)
+      await router.push('/test#two')
+      expect(updateGuard).not.toHaveBeenCalled()
+
+      router.setNextGuardReturn(true)
+      await router.push('/foo')
+      expect(leaveGuard).not.toHaveBeenCalled()
+    })
+
+    it('runs guards without a guard return set', async () => {
+      const router = createRouterMock({ runInComponentGuards: true })
+      injectRouterMock(router)
+      router.addRoute({ path: '/test', component: Test })
+      await router.push('/test')
+
+      const leaveGuard = jest.fn()
+      const updateGuard = jest.fn()
+
+      mount(Test, { props: { leaveGuard, updateGuard } })
+
+      await router.push('/test#two')
+      expect(updateGuard).toHaveBeenCalled()
+
+      await router.push('/foo')
+      expect(leaveGuard).toHaveBeenCalled()
+    })
+
+    it('runs guards with a guard', async () => {
+      const router = createRouterMock({ runInComponentGuards: true })
+      injectRouterMock(router)
+      router.addRoute({ path: '/test', component: Test })
+      await router.push('/test')
+
+      const leaveGuard = jest.fn()
+      const updateGuard = jest.fn()
+
+      mount(Test, { props: { leaveGuard, updateGuard } })
+
+      router.setNextGuardReturn(true)
+      await router.push('/test#two')
+      expect(updateGuard).toHaveBeenCalled()
+
+      router.setNextGuardReturn(true)
+      await router.push('/foo')
+      expect(leaveGuard).toHaveBeenCalled()
     })
   })
 

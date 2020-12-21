@@ -1,4 +1,5 @@
 import {
+  matchedRouteKey,
   routeLocationKey,
   RouteLocationNormalizedLoaded,
   routerKey,
@@ -10,7 +11,7 @@ import { config } from '@vue/test-utils'
 import { createReactiveRouteLocation } from './routeLocation'
 import { createRouterMock, RouterMock } from './router'
 // @ts-ignore: for api-extractor
-import { Ref } from 'vue'
+import { computed, Ref } from 'vue'
 
 /**
  * Inject global variables, overriding any previously inject router mock
@@ -30,6 +31,7 @@ export function injectRouterMock(router?: RouterMock) {
   config.global.mocks.$router = router
   config.global.mocks.$route = route
 
+  // TODO: stub that provides the prop route or the current route with machedRouteKey
   config.global.components.RouterView = RouterView
   config.global.components.RouterLink = RouterLink
 
@@ -48,9 +50,14 @@ export function injectRouterMock(router?: RouterMock) {
 export function createProvide(router: RouterMock) {
   const route = createReactiveRouteLocation(router.currentRoute)
 
+  const matchedRouteRef = computed(
+    () => router.currentRoute.value.matched[router.depth.value]
+  )
+
   return {
     [routerKey as any]: router,
     [routeLocationKey as any]: route,
     [routerViewLocationKey as any]: router.currentRoute,
+    [matchedRouteKey as any]: matchedRouteRef,
   }
 }

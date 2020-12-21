@@ -1,4 +1,4 @@
-import { Component } from 'vue'
+import { Component, Ref, ref } from 'vue'
 import {
   createMemoryHistory,
   createRouter,
@@ -17,6 +17,11 @@ export const EmptyView: Component = {
  * Router Mock instance
  */
 export interface RouterMock extends Router {
+  /**
+   * Current depeth of the router view. This index is used to find the component
+   * to display in the array `router.currentRoute.value.matched`.
+   */
+  depth: Ref<number>
   /**
    * Set a value to be returned on a navigation guard for the next navigation.
    *
@@ -120,14 +125,21 @@ export function createRouterMock({
     to: RouteLocationRaw,
     options: { replace?: boolean } = {}
   ) {
-    if (nextReturn != null) {
+    if (nextReturn != null || runInComponentGuards) {
       const removeGuard = router.beforeEach(() => {
         const value = nextReturn
         removeGuard()
         nextReturn = undefined
         return value
       })
-      // TODO: should we avoid all in component guards by deleting them here?
+
+      // avoid existing navigation guards
+      const record = router.currentRoute.value.matched[depth.value]
+      if (record && !runInComponentGuards) {
+        record.leaveGuards.clear()
+        record.updateGuards.clear()
+        // TODO: option guards
+      }
 
       pendingNavigation = (options.replace ? replace : push)(to)
       pendingNavigation
@@ -148,8 +160,11 @@ export function createRouterMock({
     return pendingNavigation || Promise.resolve()
   }
 
+  const depth = ref(0)
+
   return {
     ...router,
+    depth,
     setNextGuardReturn,
     getPendingNavigation,
   }
