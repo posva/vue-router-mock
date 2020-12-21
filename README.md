@@ -75,6 +75,32 @@ it('should paginate', async () => {
 
 Note that in this case, you will have to transform the initial `beforeAll` to `beforeEach`, so that injections are run with the correct router mock for other tests.
 
+### Nested Routes
+
+By default, the router mock comes with one single _catch all_ route. You can add routes calling the `router.addRoute()` function but **if you add nested routes and you are relying on running navigation guards**, you must manually set the _depth_ of the route you are displaying. This is because the router has no way to know which level of nesting you are trying to display. e.g. Imagine the following `routes`:
+
+```js
+const routes = [
+  {
+    path: '/users',
+    // we are not testing this one so it doesn't matter
+    component: UserView,
+    children: [
+      // UserDetail must be the same component we are unit testing
+      { path: ':id', component: UserDetail },
+    ],
+  },
+]
+```
+
+```js
+// 0 would be if we were testing UserView at /users
+router.depth.value = 1
+const wrapper = mount(UserDetail)
+```
+
+Remember, this is not necessary if you are not adding routes or if they are not nested.
+
 ### Setting the initial location
 
 By default the router mock starts on [`START_LOCATION`](https://next.router.vuejs.org/api/#start-location). In some scenarios this might need to be adjusted by pushing a new location and awaiting it before testing:
@@ -117,7 +143,9 @@ If you want to still run existing navigation guards inside component, you can ac
 
 ```js
 const router = createRouterMock({
+  // run `onBeforeRouteLeave()`, `onBeforeRouteUpdate()`, `beforeRouteEnter()`, `beforeRouteUpdate()`, and `beforeRouteLeave()`
   runInComponentGuards: true,
+  // run `beforeEnter` of added routes. Note that you must manually add these routes with `router.addRoutes()`
   runPerRouteGuards: true,
 })
 ```
@@ -133,6 +161,10 @@ const wrapper = mount(MyComponent, {
   },
 })
 ```
+
+You need to manually specify the component that is supposed to be displayed because the mock won't be able to know the level of nesting.
+
+NOTE: this might change to become automatic if the necessary `routes` are provided.
 
 ## API
 
