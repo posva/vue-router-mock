@@ -3,6 +3,8 @@ import {
   createRouter,
   RouteLocationRaw,
   Router,
+  RouteRecordRaw,
+  START_LOCATION,
 } from 'vue-router'
 
 /**
@@ -19,6 +21,8 @@ export interface RouterMock extends Router {
     returnValue: Error | boolean | RouteLocationRaw | undefined
   ): void
 
+  // NOTE: we could automatically wait for a tick inside getPendingNavigation(), that would require access to the wrapper, unless directly using nextTick from vue works. We could allow an optional parameter `eager: true` to not wait for a tick. Waiting one tick by default is likely to be more useful than not.
+
   /**
    * Returns a Promise of the pending navigation. Resolves right away if there
    * isn't any.
@@ -29,7 +33,22 @@ export interface RouterMock extends Router {
 /**
  * Creates a router mock instance
  */
-export function createRouterMock(): RouterMock {
+export function createRouterMock({
+  // TODO: test
+  /**
+   * Override the starting location before each test. Defaults to
+   * START_LOCATION.
+   */
+  initialLocation = START_LOCATION as RouteLocationRaw,
+  /**
+   * Run in-component guards. Defaults to false
+   */
+  runInComponentGuards = false,
+  /**
+   * Run per-route guards. Defaults to false
+   */
+  runPerRouteGuards = false,
+} = {}): RouterMock {
   const router = createRouter({
     history: createMemoryHistory(),
     routes: [
@@ -40,22 +59,48 @@ export function createRouterMock(): RouterMock {
     ],
   })
 
-  const { push } = router
+  const { push, addRoute, replace } = router
 
-  const pushMock = jest.fn((to) => {
+  const addRouteMock = jest.fn(
+    (
+      parentRecordName: Required<RouteRecordRaw>['name'] | RouteRecordRaw,
+      record?: RouteRecordRaw
+    ) => {
+      record = record || (parentRecordName as RouteRecordRaw)
+
+      if (!runPerRouteGuards) {
+        // remove existing records to force our own router.beforeEach and easier
+        // way to mock navigation guard returns.
+        delete record.beforeEnter
+      }
+
+      // @ts-ignore: this should be valid
+      return addRoute(parentRecordName, record)
+    }
+  )
+
+  const pushMock = jest.fn((to: RouteLocationRaw) => {
     return consumeNextReturn(to)
   })
 
-  const replaceMock = jest.fn((to) => {
-    return consumeNextReturn({ ...to, replace: true })
+  const replaceMock = jest.fn((to: RouteLocationRaw) => {
+    return consumeNextReturn(to, { replace: true })
   })
 
   router.push = pushMock
   router.replace = replaceMock
+  router.addRoute = addRouteMock
 
   beforeEach(() => {
     pushMock.mockClear()
     replaceMock.mockClear()
+    addRouteMock.mockClear()
+
+    nextReturn = undefined
+    router.currentRoute.value =
+      initialLocation === START_LOCATION
+        ? START_LOCATION
+        : router.resolve(initialLocation)
   })
 
   let nextReturn: Error | boolean | RouteLocationRaw | undefined = undefined
@@ -66,7 +111,10 @@ export function createRouterMock(): RouterMock {
     nextReturn = returnValue
   }
 
-  function consumeNextReturn(to: RouteLocationRaw) {
+  function consumeNextReturn(
+    to: RouteLocationRaw,
+    options: { replace?: boolean } = {}
+  ) {
     if (nextReturn != null) {
       const removeGuard = router.beforeEach(() => {
         const value = nextReturn
@@ -74,7 +122,9 @@ export function createRouterMock(): RouterMock {
         nextReturn = undefined
         return value
       })
-      pendingNavigation = push(to)
+      // TODO: should we avoid all in component guards by deleting them here?
+
+      pendingNavigation = (options.replace ? replace : push)(to)
       pendingNavigation
         .catch(() => {})
         .finally(() => {
