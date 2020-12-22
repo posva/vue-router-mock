@@ -2,7 +2,7 @@
 
 > Easily mock routing interactions in your Vue 3 apps
 
-**⚠️ This library intends to be a collaboration of people writing tests to create a better experience writing tests that involve the use of routing with Vue**
+**⚠️ This library intends to be a collaboration of people writing tests to create a better experience writing tests that involve the use of routing with Vue.** Your feedback and experienced is welcomed in issues and discussions to give the API shape and create a library that eases unit testing components that deal with the router.
 
 ## Installation
 
@@ -170,9 +170,10 @@ NOTE: this might change to become automatic if the necessary `routes` are provid
 
 ## Related
 
-- [Jest](#a)
-- [Vue Test Utils](#a)
-- [Vue Router](#a)
+- [Jest](https://jestjs.io/)
+- [Vue Test Utils](https://github.com/vuejs/vue-test-utils-next)
+- [Vue Router](https://github.com/vuejs/vue-router-next)
+- [Vuex Mock Store](https://github.com/posva/vuex-mock-store) - A Vuex 3.x mock
 
 ## License
 
