@@ -26,15 +26,41 @@ The goal of Vue Router Mock is to enable users to **unit and integration test** 
 
 ## Usage
 
-Vue Router Mock exposes a few functions to be used individually and they are all documented through TS. But most of the time you want to globally inject the router mock in tests requiring the router to be present. This will give your tested component access to `$route` and `$router` and a few handy tools for unit testing behaviors.
+Vue Router Mock exposes a few functions to be used individually and they are all documented through TS. But most of the time you want to globally inject the router in a _setupFilesAfterEnv_ file. Create a `jest.setup.js` file at the root of your project (it can be named differently):
 
-Start by injecting the router _before_ your tests:
+```js
+const {
+  VueRouterMock,
+  createRouterMock,
+  injectRouterMock,
+} = require('vue-router-mock')
+const { config } = require('@vue/test-utils')
+
+// create one router per test file
+const router = createRouterMock()
+beforeEach(() => {
+  injectRouterMock(router)
+})
+
+// Add properties to the wrapper
+config.plugins.VueWrapper.install(VueRouterMock)
+```
+
+Then add this line to your `jest.config.js`:
+
+```js
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+```
+
+This will inject a router in all your tests. If for specific tests, you need to inject a different version of the router, you can do so:
 
 ```js
 describe('SearchUsers', () => {
-  // create one mock instance
-  const router = createRouterMock()
-  beforeAll(() => {
+  // create one mock instance, pass options
+  const router = createRouterMock({
+    // ...
+  })
+  beforeEach(() => {
     // inject it globally to ensure `useRoute()`, `$route`, etc work properly and give you access to test specific functions
     injectRouterMock(router)
   })
@@ -42,15 +68,14 @@ describe('SearchUsers', () => {
   it('should paginate', async () => {
     const wrapper = mount(SearchUsers)
 
-    // router will have a few extra typings
-    expect(wrapper.vm.$router).toBe(router)
+    expect(wrapper.router).toBe(router)
 
     // go to the next page
     // this will internally trigger `router.push({ query: { page: 2 }})`
     wrapper.find('button.next-page').click()
 
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith(expect.objectContaining({ query: { page: 2 } }))
-    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1)
+    expect(wrapper.router.push).toHaveBeenCalledWith(expect.objectContaining({ query: { page: 2 } }))
+    expect(wrapper.router.push).toHaveBeenCalledTimes(1)
 
     // if we had a navigation guard fetching the search results, waiting for it to be done
     // will allow us to
@@ -72,8 +97,6 @@ it('should paginate', async () => {
   const wrapper = mount(SearchUsers)
 })
 ```
-
-Note that in this case, you will have to transform the initial `beforeAll` to `beforeEach`, so that injections are run with the correct router mock for other tests.
 
 ### Nested Routes
 
