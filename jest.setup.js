@@ -1,4 +1,10 @@
-const { routerMockPlugin } = require('./src')
+const { VueRouterMock, createRouterMock, injectRouterMock } = require('./src')
 const { config } = require('@vue/test-utils')
 
-// config.plugins.VueWrapper.install(routerMockPlugin)
+const router = createRouterMock()
+
+beforeEach(() => {
+  injectRouterMock(router)
+})
+
+config.plugins.VueWrapper.install(VueRouterMock)

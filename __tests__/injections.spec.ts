@@ -1,14 +1,10 @@
 import { mount } from '@vue/test-utils'
 import { useRoute, useRouter } from 'vue-router'
-import { injectRouterMock, createRouterMock } from '../src'
+import { getRouter } from '../src'
 
 describe('Injections', () => {
-  const router = createRouterMock()
-  beforeAll(() => {
-    injectRouterMock(router)
-  })
-
   it('injects the router instance', async () => {
+    const router = getRouter()
     const wrapper = mount({
       render: () => null,
       setup() {
@@ -20,6 +16,12 @@ describe('Injections', () => {
     expect(wrapper.vm.$router).toBe(router)
   })
 
+  it('sets the wrapper router property', () => {
+    const wrapper = mount({ render: () => null })
+    const router = getRouter()
+    expect(wrapper.router).toBe(router)
+  })
+
   it('injects the current route', async () => {
     const wrapper = mount({
       render: () => null,
@@ -28,6 +30,7 @@ describe('Injections', () => {
         return { r }
       },
     })
+    const router = getRouter()
 
     expect(wrapper.vm.$route).toBe(wrapper.vm.r)
     expect(wrapper.vm.r).toMatchObject({ fullPath: '/' })

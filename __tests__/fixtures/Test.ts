@@ -1,4 +1,4 @@
-import { defineComponent, getCurrentInstance, h, PropType } from 'vue'
+import { defineComponent, h, PropType } from 'vue'
 import {
   NavigationGuard,
   onBeforeRouteLeave,

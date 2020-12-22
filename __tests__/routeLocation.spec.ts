@@ -3,10 +3,6 @@ import { createRouterMock, injectRouterMock } from '../src'
 import Test from './fixtures/Test'
 
 describe('Route location', () => {
-  beforeAll(() => {
-    injectRouterMock()
-  })
-
   it('creates router properties', async () => {
     const wrapper = mount(Test)
 

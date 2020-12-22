@@ -5,6 +5,7 @@ import {
   RouteLocationRaw,
   Router,
   RouteRecordRaw,
+  RouterOptions,
   START_LOCATION,
 } from 'vue-router'
 
@@ -41,24 +42,27 @@ export interface RouterMock extends Router {
   getPendingNavigation(): ReturnType<Router['push']>
 }
 
-/**
- * Creates a router mock instance
- */
-export function createRouterMock({
+export interface RouterMockOptions extends Partial<RouterOptions> {
   /**
    * Override the starting location before each test. Defaults to
    * START_LOCATION.
    */
-  initialLocation = START_LOCATION as RouteLocationRaw,
+  initialLocation?: RouteLocationRaw
   /**
    * Run in-component guards. Defaults to false
    */
-  runInComponentGuards = false,
+  runInComponentGuards?: boolean
   /**
    * Run per-route guards. Defaults to false
    */
-  runPerRouteGuards = false,
-} = {}): RouterMock {
+  runPerRouteGuards?: boolean
+}
+
+/**
+ * Creates a router mock instance
+ * @param options options to initialize the router
+ */
+export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   const router = createRouter({
     history: createMemoryHistory(),
     routes: [
@@ -67,7 +71,11 @@ export function createRouterMock({
         component: EmptyView,
       },
     ],
+    ...options,
   })
+
+  let { runPerRouteGuards, runInComponentGuards } = options
+  const initialLocation = options.initialLocation || START_LOCATION
 
   const { push, addRoute, replace } = router
 
@@ -138,7 +146,13 @@ export function createRouterMock({
       if (record && !runInComponentGuards) {
         record.leaveGuards.clear()
         record.updateGuards.clear()
-        // TODO: option guards
+        Object.values(record.components).forEach((component) => {
+          // TODO: handle promises?
+          // @ts-ignore
+          delete component.beforeRouteUpdate
+          // @ts-ignore
+          delete component.beforeRouteLeave
+        })
       }
 
       pendingNavigation = (options.replace ? replace : push)(to)

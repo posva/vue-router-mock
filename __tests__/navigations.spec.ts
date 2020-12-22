@@ -1,14 +1,14 @@
 import { mount } from '@vue/test-utils'
 import { NavigationFailureType } from 'vue-router'
-import { injectRouterMock, createRouterMock, EmptyView } from '../src'
+import {
+  injectRouterMock,
+  createRouterMock,
+  EmptyView,
+  getRouter,
+} from '../src'
 import Test from './fixtures/Test'
 
 describe('Navigations', () => {
-  const router = createRouterMock()
-  beforeEach(() => {
-    injectRouterMock(router)
-  })
-
   it('can check calls on push', async () => {
     const wrapper = mount(Test)
 
@@ -32,6 +32,7 @@ describe('Navigations', () => {
 
   it('rejects next navigation with an error', async () => {
     const wrapper = mount(Test)
+    const router = getRouter()
     const error = new Error('fail')
     router.setNextGuardReturn(error)
     await expect(wrapper.vm.$router.push('/foo')).rejects.toBe(error)
@@ -39,6 +40,7 @@ describe('Navigations', () => {
 
   it('can abort the next navigation', async () => {
     const wrapper = mount(Test)
+    const router = getRouter()
     router.setNextGuardReturn(false)
     await expect(wrapper.vm.$router.push('/foo')).resolves.toMatchObject({
       type: NavigationFailureType.aborted,
@@ -71,72 +73,106 @@ describe('Navigations', () => {
   })
 
   describe('in-component guards', () => {
-    it('ignores guards by default with no guard', async () => {
-      const router = createRouterMock()
-      injectRouterMock(router)
-      router.addRoute({ path: '/test', component: Test })
-      await router.push('/test')
-
+    async function factory(
+      options: Parameters<typeof createRouterMock>[0] = {}
+    ) {
       const leaveGuard = jest.fn()
       const updateGuard = jest.fn()
+      const beforeRouteEnter = jest.fn()
+      const beforeRouteUpdate = jest.fn()
+      const beforeRouteLeave = jest.fn()
 
-      mount(Test, { props: { leaveGuard, updateGuard } })
+      const RouteComponent = {
+        ...Test,
+        beforeRouteEnter,
+        beforeRouteUpdate,
+        beforeRouteLeave,
+      }
+      const router = createRouterMock(options)
+      injectRouterMock(router)
+      router.addRoute({ path: '/test', component: RouteComponent })
+      await router.push('/test')
+
+      mount(RouteComponent, { props: { leaveGuard, updateGuard } })
+
+      return {
+        router,
+        leaveGuard,
+        updateGuard,
+        beforeRouteEnter,
+        beforeRouteUpdate,
+        beforeRouteLeave,
+      }
+    }
+
+    it('ignores guards by default with no guard', async () => {
+      const {
+        router,
+        leaveGuard,
+        updateGuard,
+        beforeRouteEnter,
+        beforeRouteUpdate,
+        beforeRouteLeave,
+      } = await factory()
 
       await router.push('/test#two')
+      expect(beforeRouteEnter).not.toHaveBeenCalled()
       expect(updateGuard).not.toHaveBeenCalled()
+      expect(beforeRouteUpdate).not.toHaveBeenCalled()
 
       await router.push('/foo')
       expect(leaveGuard).not.toHaveBeenCalled()
+      expect(beforeRouteLeave).not.toHaveBeenCalled()
     })
 
     it('ignores guards by default with a guard', async () => {
-      const router = createRouterMock()
-      injectRouterMock(router)
-      router.addRoute({ path: '/test', component: Test })
-      await router.push('/test')
-
-      const leaveGuard = jest.fn()
-      const updateGuard = jest.fn()
-
-      mount(Test, { props: { leaveGuard, updateGuard } })
+      const {
+        router,
+        leaveGuard,
+        updateGuard,
+        beforeRouteEnter,
+        beforeRouteUpdate,
+        beforeRouteLeave,
+      } = await factory()
 
       router.setNextGuardReturn(true)
       await router.push('/test#two')
+      expect(beforeRouteEnter).not.toHaveBeenCalled()
       expect(updateGuard).not.toHaveBeenCalled()
+      expect(beforeRouteUpdate).not.toHaveBeenCalled()
 
       router.setNextGuardReturn(true)
       await router.push('/foo')
       expect(leaveGuard).not.toHaveBeenCalled()
+      expect(beforeRouteLeave).not.toHaveBeenCalled()
     })
 
     it('runs guards without a guard return set', async () => {
-      const router = createRouterMock({ runInComponentGuards: true })
-      injectRouterMock(router)
-      router.addRoute({ path: '/test', component: Test })
-      await router.push('/test')
+      const {
+        router,
+        leaveGuard,
+        updateGuard,
+        beforeRouteEnter,
+        beforeRouteUpdate,
+        beforeRouteLeave,
+      } = await factory({
+        runInComponentGuards: true,
+      })
 
-      const leaveGuard = jest.fn()
-      const updateGuard = jest.fn()
-
-      mount(Test, { props: { leaveGuard, updateGuard } })
-
+      expect(beforeRouteEnter).toHaveBeenCalled()
       await router.push('/test#two')
       expect(updateGuard).toHaveBeenCalled()
+      expect(beforeRouteUpdate).toHaveBeenCalled()
 
       await router.push('/foo')
       expect(leaveGuard).toHaveBeenCalled()
+      expect(beforeRouteLeave).toHaveBeenCalled()
     })
 
     it('runs guards with a guard', async () => {
-      const router = createRouterMock({ runInComponentGuards: true })
-      injectRouterMock(router)
-      router.addRoute({ path: '/test', component: Test })
-      await router.push('/test')
-
-      const leaveGuard = jest.fn()
-      const updateGuard = jest.fn()
-
-      mount(Test, { props: { leaveGuard, updateGuard } })
+      const { router, leaveGuard, updateGuard } = await factory({
+        runInComponentGuards: true,
+      })
 
       router.setNextGuardReturn(true)
       await router.push('/test#two')
@@ -150,6 +186,7 @@ describe('Navigations', () => {
 
   it('can redirect the next navigation', async () => {
     const wrapper = mount(Test)
+    const router = getRouter()
     router.setNextGuardReturn('/bar')
     await expect(wrapper.vm.$router.push('/foo')).resolves.toBe(undefined)
     expect(wrapper.text()).toBe('/bar')
@@ -157,6 +194,7 @@ describe('Navigations', () => {
 
   it.skip('can wait for an ongoing navigation', async () => {
     const wrapper = mount(Test)
+    const router = getRouter()
 
     // to force async navigation
     router.setNextGuardReturn('/bar')
