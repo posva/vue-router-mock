@@ -93,10 +93,13 @@ describe('Navigations', () => {
       router.addRoute({ path: '/test', component: RouteComponent })
       await router.push('/test')
 
-      mount(RouteComponent, { props: { leaveGuard, updateGuard } })
+      const wrapper = mount(RouteComponent, {
+        props: { leaveGuard, updateGuard },
+      })
 
       return {
         router,
+        wrapper,
         leaveGuard,
         updateGuard,
         beforeRouteEnter,
@@ -150,6 +153,7 @@ describe('Navigations', () => {
     it('runs guards without a guard return set', async () => {
       const {
         router,
+        wrapper,
         leaveGuard,
         updateGuard,
         beforeRouteEnter,
@@ -163,10 +167,12 @@ describe('Navigations', () => {
       await router.push('/test#two')
       expect(updateGuard).toHaveBeenCalled()
       expect(beforeRouteUpdate).toHaveBeenCalled()
+      expect(beforeRouteUpdate.mock.instances[0]).toBe(wrapper.vm)
 
       await router.push('/foo')
       expect(leaveGuard).toHaveBeenCalled()
       expect(beforeRouteLeave).toHaveBeenCalled()
+      expect(beforeRouteLeave.mock.instances[0]).toBe(wrapper.vm)
     })
 
     it('runs guards with a guard', async () => {
