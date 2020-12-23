@@ -6,12 +6,14 @@ import {
   RouterLink,
   RouterView,
   routerViewLocationKey,
+  // @ts-ignore: for api-extractor
+  RouteLocationMatched,
 } from 'vue-router'
 import { config } from '@vue/test-utils'
 import { createReactiveRouteLocation } from './routeLocation'
 import { createRouterMock, RouterMock } from './router'
 // @ts-ignore: for api-extractor
-import { computed, Ref } from 'vue'
+import { computed, Ref, ComputedRef } from 'vue'
 
 /**
  * Inject global variables, overriding any previously inject router mock

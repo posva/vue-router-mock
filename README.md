@@ -24,7 +24,7 @@ This library
 
 The goal of Vue Router Mock is to enable users to **unit and integration test** navigation scenarios. This means tests that are isolated enough to not be end to end tests (e.g. using [Cypress](https://www.cypress.io/)) or are edge cases (e.g. network failures). Because of this, some scenarios are more interesting as end to end tests, **using the real** vue router.
 
-## Usage
+## Introduction
 
 Vue Router Mock exposes a few functions to be used individually and they are all documented through TS. But most of the time you want to globally inject the router in a _setupFilesAfterEnv_ file. Create a `jest.setup.js` file at the root of your project (it can be named differently):
 
