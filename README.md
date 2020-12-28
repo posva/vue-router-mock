@@ -61,7 +61,8 @@ describe('SearchUsers', () => {
     // ...
   })
   beforeEach(() => {
-    // inject it globally to ensure `useRoute()`, `$route`, etc work properly and give you access to test specific functions
+    // inject it globally to ensure `useRoute()`, `$route`, etc work
+    // properly and give you access to test specific functions
     injectRouterMock(router)
   })
 
@@ -77,13 +78,15 @@ describe('SearchUsers', () => {
     expect(wrapper.router.push).toHaveBeenCalledWith(expect.objectContaining({ query: { page: 2 } }))
     expect(wrapper.router.push).toHaveBeenCalledTimes(1)
 
-    // if we had a navigation guard fetching the search results, waiting for it to be done
-    // will allow us to
+    // if we had a navigation guard fetching the search results,
+    // waiting for it to be done will allow us to wait until it's done.
+    // Note you need to mock the fetch and to activate navigation
+    // guards as explained below
     await router.getPendingNavigation()
     // wait for the component to render again if we want to check
     await wrapper.vm.nextTick()
 
-    expect(wrapper.find('#user-results '))
+    expect(wrapper.find('#user-results .user').text()).toMatchSnapshot()
 
   })
 ```
@@ -133,32 +136,6 @@ You can access the instance of the router mock in multiple ways:
     await router.push('/new-location')
   })
   ```
-
-### Nested Routes
-
-By default, the router mock comes with one single _catch all_ route. You can add routes calling the `router.addRoute()` function but **if you add nested routes and you are relying on running navigation guards**, you must manually set the _depth_ of the route you are displaying. This is because the router has no way to know which level of nesting you are trying to display. e.g. Imagine the following `routes`:
-
-```js
-const routes = [
-  {
-    path: '/users',
-    // we are not testing this one so it doesn't matter
-    component: UserView,
-    children: [
-      // UserDetail must be the same component we are unit testing
-      { path: ':id', component: UserDetail },
-    ],
-  },
-]
-```
-
-```js
-// 0 would be if we were testing UserView at /users
-router.depth.value = 1
-const wrapper = mount(UserDetail)
-```
-
-Remember, this is not necessary if you are not adding routes or if they are not nested.
 
 ### Setting the initial location
 
@@ -225,7 +202,33 @@ You need to manually specify the component that is supposed to be displayed beca
 
 NOTE: this might change to become automatic if the necessary `routes` are provided.
 
-## API
+## Caveats
+
+### Nested Routes
+
+By default, the router mock comes with one single _catch all_ route. You can add routes calling the `router.addRoute()` function but **if you add nested routes and you are relying on running navigation guards**, you must manually set the _depth_ of the route you are displaying. This is because the router has no way to know which level of nesting you are trying to display. e.g. Imagine the following `routes`:
+
+```js
+const routes = [
+  {
+    path: '/users',
+    // we are not testing this one so it doesn't matter
+    component: UserView,
+    children: [
+      // UserDetail must be the same component we are unit testing
+      { path: ':id', component: UserDetail },
+    ],
+  },
+]
+```
+
+```js
+// 0 would be if we were testing UserView at /users
+router.depth.value = 1
+const wrapper = mount(UserDetail)
+```
+
+Remember, this is not necessary if you are not adding routes or if they are not nested.
 
 ## Related
 
