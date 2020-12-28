@@ -98,6 +98,42 @@ it('should paginate', async () => {
 })
 ```
 
+## Guide
+
+## Accessing the Router Mock instance
+
+You can access the instance of the router mock in multiple ways:
+
+- Access `wrapper.router`:
+
+  ```js
+  it('tests something', async () => {
+    const wrapper = mount(MyComponent)
+    await wrapper.router.push('/new-location')
+  })
+  ```
+
+- Access it through `wrapper.vm`:
+
+  ```js
+  it('tests something', async () => {
+    const wrapper = mount(MyComponent)
+    await wrapper.vm.$router.push('/new-location')
+    expect(wrapper.vm.$route.name).toBe('NewLocation')
+  })
+  ```
+
+- Call `getRouter()` inside of a test:
+
+  ```js
+  it('tests something', async () => {
+    // can be called before creating the wrapper
+    const router = getRouter()
+    const wrapper = mount(MyComponent)
+    await router.push('/new-location')
+  })
+  ```
+
 ### Nested Routes
 
 By default, the router mock comes with one single _catch all_ route. You can add routes calling the `router.addRoute()` function but **if you add nested routes and you are relying on running navigation guards**, you must manually set the _depth_ of the route you are displaying. This is because the router has no way to know which level of nesting you are trying to display. e.g. Imagine the following `routes`:
@@ -153,7 +189,7 @@ You can simulate the failure of the next navigation
 
 ### Simulating a navigation guard
 
-By default, all navigation guards are ignored so that you can simulate the return of the next guard by using `setNextGuardReturn()`:
+By default, **all navigation guards are ignored** so that you can simulate the return of the next guard by using `setNextGuardReturn()` without depending on existing ones:
 
 ```js
 // simulate a navigation guard that returns false
