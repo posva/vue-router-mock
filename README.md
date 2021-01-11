@@ -137,6 +137,19 @@ You can access the instance of the router mock in multiple ways:
   })
   ```
 
+### Setting parameters
+
+`setParams` allows you to set some initial parameters on the route before mounting your component:
+
+```js
+it('should display the user details', async () => {
+  getRouter().setParams({ userId: 12 })
+  const wrapper = mount(UserDetails)
+
+  // test...
+})
+```
+
 ### Setting the initial location
 
 By default the router mock starts on [`START_LOCATION`](https://next.router.vuejs.org/api/#start-location). In some scenarios this might need to be adjusted by pushing a new location and awaiting it before testing:

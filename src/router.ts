@@ -3,6 +3,7 @@ import {
   createMemoryHistory,
   createRouter,
   RouteLocationRaw,
+  RouteParamsRaw,
   Router,
   RouteRecordRaw,
   RouterOptions,
@@ -19,7 +20,7 @@ export const EmptyView: Component = {
  */
 export interface RouterMock extends Router {
   /**
-   * Current depeth of the router view. This index is used to find the component
+   * Current depth of the router view. This index is used to find the component
    * to display in the array `router.currentRoute.value.matched`.
    */
   depth: Ref<number>
@@ -40,6 +41,12 @@ export interface RouterMock extends Router {
    * isn't any.
    */
   getPendingNavigation(): ReturnType<Router['push']>
+
+  /**
+   * Sets the params of the current route without triggering a navigation.
+   * @param params - params to set in the current route
+   */
+  setParams(params: RouteParamsRaw): void
 }
 
 export interface RouterMockOptions extends Partial<RouterOptions> {
@@ -174,6 +181,10 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     return pendingNavigation || Promise.resolve()
   }
 
+  function setParams(params: RouteParamsRaw) {
+    router.currentRoute.value = router.resolve({ params })
+  }
+
   const depth = ref(0)
 
   return {
@@ -181,5 +192,6 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     depth,
     setNextGuardReturn,
     getPendingNavigation,
+    setParams,
   }
 }
