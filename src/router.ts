@@ -1,4 +1,4 @@
-import { Component, Ref, ref } from 'vue'
+import { Component, nextTick, Ref, ref } from 'vue'
 import {
   createMemoryHistory,
   createRouter,
@@ -43,7 +43,8 @@ export interface RouterMock extends Router {
   getPendingNavigation(): ReturnType<Router['push']>
 
   /**
-   * Sets the params of the current route without triggering a navigation.
+   * Sets the params of the current route without triggering a navigation. Can
+   * be awaited to wait for Vue to render again.
    *
    * @param params - params to set in the current route
    */
@@ -184,6 +185,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
 
   function setParams(params: RouteParamsRaw) {
     router.currentRoute.value = router.resolve({ params })
+    return nextTick()
   }
 
   const depth = ref(0)
