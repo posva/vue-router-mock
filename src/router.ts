@@ -44,6 +44,7 @@ export interface RouterMock extends Router {
 
   /**
    * Sets the params of the current route without triggering a navigation.
+   *
    * @param params - params to set in the current route
    */
   setParams(params: RouteParamsRaw): void

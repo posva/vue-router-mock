@@ -139,12 +139,12 @@ You can access the instance of the router mock in multiple ways:
 
 ### Setting parameters
 
-`setParams` allows you to set some initial parameters on the route before mounting your component:
+`setParams` allows you to change route `params` without triggering a navigation:
 
 ```js
 it('should display the user details', async () => {
-  getRouter().setParams({ userId: 12 })
   const wrapper = mount(UserDetails)
+  getRouter().setParams({ userId: 12 })
 
   // test...
 })
