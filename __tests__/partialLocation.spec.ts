@@ -2,8 +2,8 @@ import { mount } from '@vue/test-utils'
 import { watch } from 'vue'
 import { getRouter } from '../src'
 
-describe('Params utils', () => {
-  describe('`setParams`', () => {
+describe('partial location', () => {
+  describe('setParams', () => {
     it('sets current route params', async () => {
       const router = getRouter()
       router.setParams({ userId: 12 })
@@ -28,7 +28,7 @@ describe('Params utils', () => {
     })
   })
 
-  describe('`setQuery`', () => {
+  describe('setQuery', () => {
     it('sets current route query', async () => {
       const router = getRouter()
       router.setQuery({ page: 2 })
@@ -50,6 +50,31 @@ describe('Params utils', () => {
       await router.setQuery({ page: 3 })
       expect(spy).toHaveBeenCalledTimes(2)
       expect(wrapper.text()).toBe('3')
+    })
+  })
+
+  describe('setHash', () => {
+    it('sets current route hash', async () => {
+      const router = getRouter()
+      router.setHash('#more')
+      const wrapper = mount({
+        template: `<p>{{ $route.hash }}</p>`,
+      })
+      const spy = jest.fn()
+
+      watch(wrapper.vm.$route, spy)
+
+      expect(wrapper.vm.$route.hash).toEqual('#more')
+      expect(wrapper.text()).toBe('#more')
+      expect(spy).toHaveBeenCalledTimes(0)
+
+      await router.setHash('#more')
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(wrapper.text()).toBe('#more')
+
+      await router.setHash('#about')
+      expect(spy).toHaveBeenCalledTimes(2)
+      expect(wrapper.text()).toBe('#about')
     })
   })
 })

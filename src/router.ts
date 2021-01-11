@@ -49,7 +49,7 @@ export interface RouterMock extends Router {
    *
    * @param params - params to set in the current route
    */
-  setParams(params: RouteParamsRaw): void
+  setParams(params: RouteParamsRaw): Promise<void>
 
   /**
    * Sets the query of the current route without triggering a navigation. Can
@@ -57,7 +57,15 @@ export interface RouterMock extends Router {
    *
    * @param query - query to set in the current route
    */
-  setQuery(query: LocationQueryRaw): void
+  setQuery(query: LocationQueryRaw): Promise<void>
+
+  /**
+   * Sets the hash of the current route without triggering a navigation. Can
+   * be awaited to wait for Vue to render again.
+   *
+   * @param hash - hash to set in the current route
+   */
+  setHash(hash: string): Promise<void>
 }
 
 export interface RouterMockOptions extends Partial<RouterOptions> {
@@ -202,6 +210,11 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     return nextTick()
   }
 
+  function setHash(hash: string) {
+    router.currentRoute.value = router.resolve({ hash })
+    return nextTick()
+  }
+
   const depth = ref(0)
 
   return {
@@ -211,5 +224,6 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     getPendingNavigation,
     setParams,
     setQuery,
+    setHash,
   }
 }

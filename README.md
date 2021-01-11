@@ -161,8 +161,8 @@ it('should display the user details', async () => {
 })
 ```
 
-`setQuery` is very similar.
-It can be used to set the route query without triggering a navigation,
+`setQuery` and `setHash` are very similar.
+They can be used to set the route query or hash without triggering a navigation,
 and can be awaited too.
 
 ### Setting the initial location
