@@ -2,6 +2,7 @@ import { Component, nextTick, Ref, ref } from 'vue'
 import {
   createMemoryHistory,
   createRouter,
+  LocationQueryRaw,
   RouteLocationRaw,
   RouteParamsRaw,
   Router,
@@ -49,6 +50,14 @@ export interface RouterMock extends Router {
    * @param params - params to set in the current route
    */
   setParams(params: RouteParamsRaw): void
+
+  /**
+   * Sets the query of the current route without triggering a navigation. Can
+   * be awaited to wait for Vue to render again.
+   *
+   * @param query - query to set in the current route
+   */
+  setQuery(query: LocationQueryRaw): void
 }
 
 export interface RouterMockOptions extends Partial<RouterOptions> {
@@ -188,6 +197,11 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     return nextTick()
   }
 
+  function setQuery(query: LocationQueryRaw) {
+    router.currentRoute.value = router.resolve({ query })
+    return nextTick()
+  }
+
   const depth = ref(0)
 
   return {
@@ -196,5 +210,6 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     setNextGuardReturn,
     getPendingNavigation,
     setParams,
+    setQuery,
   }
 }
