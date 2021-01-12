@@ -198,7 +198,7 @@ describe('Navigations', () => {
     expect(wrapper.text()).toBe('/bar')
   })
 
-  it.skip('can wait for an ongoing navigation', async () => {
+  it('can wait for an ongoing navigation', async () => {
     const wrapper = mount(Test)
     const router = getRouter()
 

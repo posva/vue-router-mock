@@ -150,6 +150,21 @@ it('should display the user details', async () => {
 })
 ```
 
+It can be awaited if you need to wait for Vue to render again:
+
+```js
+it('should display the user details', async () => {
+  const wrapper = mount(UserDetails)
+  await getRouter().setParams({ userId: 12 })
+
+  // test...
+})
+```
+
+`setQuery` and `setHash` are very similar.
+They can be used to set the route query or hash without triggering a navigation,
+and can be awaited too.
+
 ### Setting the initial location
 
 By default the router mock starts on [`START_LOCATION`](https://next.router.vuejs.org/api/#start-location). In some scenarios this might need to be adjusted by pushing a new location and awaiting it before testing:
