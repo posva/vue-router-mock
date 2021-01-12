@@ -1,3 +1,11 @@
+## [0.0.2](https://github.com/posva/vue-router-mock/compare/v0.0.1...v0.0.2) (2021-01-12)
+
+### Features
+
+- allow awaiting setParams ([6d2829d](https://github.com/posva/vue-router-mock/commit/6d2829d22645c02e2bca85454bfd88685a7284d1))
+- setParams ([#43](https://github.com/posva/vue-router-mock/issues/43)) ([d07b2e2](https://github.com/posva/vue-router-mock/commit/d07b2e26a742db4a07ac1a6dd97d85284b74f552))
+- setQuery and setHash ([#47](https://github.com/posva/vue-router-mock/issues/47)) ([b401adf](https://github.com/posva/vue-router-mock/commit/b401adf9286cec2f20eac811b3a35df6c2bba31f))
+
 ## [0.0.1](https://github.com/posva/vue-router-mock/compare/v0.0.0...v0.0.1) (2020-12-28)
 
 ### Features
