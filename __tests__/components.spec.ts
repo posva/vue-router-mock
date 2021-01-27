@@ -10,7 +10,7 @@ describe('components', () => {
     )
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      `"<router-link-stub></router-link-stub>"`
+      `"<router-link-stub to=\\"/\\"></router-link-stub>"`
     )
   })
 
