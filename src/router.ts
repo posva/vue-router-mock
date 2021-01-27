@@ -191,8 +191,13 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
       return pendingNavigation
     }
 
-    // NOTE: should we trigger a push to reset the internal pending navigation of the router?
-    router.currentRoute.value = router.resolve(to)
+    // we try to resolve the navigation
+    // but catch the error to simplify testing and avoid having to declare
+    // all the routes in the mock router
+    try {
+      // NOTE: should we trigger a push to reset the internal pending navigation of the router?
+      router.currentRoute.value = router.resolve(to)
+    } catch (e) {}
     return Promise.resolve()
   }
 
