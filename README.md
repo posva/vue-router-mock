@@ -89,6 +89,7 @@ describe('SearchUsers', () => {
     expect(wrapper.find('#user-results .user').text()).toMatchSnapshot()
 
   })
+})
 ```
 
 If you need to create a specific version of the router for one single test (or a nested suite of them), you should call the same functions:
