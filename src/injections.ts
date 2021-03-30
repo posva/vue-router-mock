@@ -33,7 +33,7 @@ export function injectRouterMock(router?: RouterMock) {
   config.global.mocks.$router = router
   config.global.mocks.$route = route
 
-  // TODO: stub that provides the prop route or the current route with machedRouteKey
+  // TODO: stub that provides the prop route or the current route with matchedRouteKey
   config.global.components.RouterView = RouterView
   config.global.components.RouterLink = RouterLink
 
