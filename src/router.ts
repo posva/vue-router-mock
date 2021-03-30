@@ -86,6 +86,7 @@ export interface RouterMockOptions extends Partial<RouterOptions> {
 
 /**
  * Creates a router mock instance
+ *
  * @param options - options to initialize the router
  */
 export function createRouterMock(options: RouterMockOptions = {}): RouterMock {

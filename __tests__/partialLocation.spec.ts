@@ -12,7 +12,7 @@ describe('partial location', () => {
       })
       const spy = jest.fn()
 
-      watch(wrapper.vm.$route, spy)
+      watch(() => wrapper.vm.$route.params, spy)
 
       expect(wrapper.vm.$route.params).toEqual({ userId: '12' })
       expect(wrapper.text()).toBe('12')
@@ -37,7 +37,7 @@ describe('partial location', () => {
       })
       const spy = jest.fn()
 
-      watch(wrapper.vm.$route, spy)
+      watch(() => wrapper.vm.$route.query, spy)
 
       expect(wrapper.vm.$route.query).toEqual({ page: '2' })
       expect(wrapper.text()).toBe('2')
@@ -62,15 +62,15 @@ describe('partial location', () => {
       })
       const spy = jest.fn()
 
-      watch(wrapper.vm.$route, spy)
+      watch(() => wrapper.vm.$route.hash, spy)
 
       expect(wrapper.vm.$route.hash).toEqual('#more')
       expect(wrapper.text()).toBe('#more')
       expect(spy).toHaveBeenCalledTimes(0)
 
-      await router.setHash('#more')
+      await router.setHash('#other')
       expect(spy).toHaveBeenCalledTimes(1)
-      expect(wrapper.text()).toBe('#more')
+      expect(wrapper.text()).toBe('#other')
 
       await router.setHash('#about')
       expect(spy).toHaveBeenCalledTimes(2)
