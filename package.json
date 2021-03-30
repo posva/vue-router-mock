@@ -1,6 +1,6 @@
 {
   "name": "vue-router-mock",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Some awesome description",
   "main": "dist/vue-router-mock.cjs.js",
   "unpkg": "dist/vue-router-mock.global.js",

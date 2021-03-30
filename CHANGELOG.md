@@ -1,3 +1,9 @@
+## [0.0.3](https://github.com/posva/vue-router-mock/compare/v0.0.2...v0.0.3) (2021-03-30)
+
+### Features
+
+- catch resolve errors (fixes [#41](https://github.com/posva/vue-router-mock/issues/41)) ([#53](https://github.com/posva/vue-router-mock/issues/53)) ([f91dcdc](https://github.com/posva/vue-router-mock/commit/f91dcdc7a62d212086fa86da5fd7c2fa522bfc56))
+
 ## [0.0.2](https://github.com/posva/vue-router-mock/compare/v0.0.1...v0.0.2) (2021-01-12)
 
 ### Features
