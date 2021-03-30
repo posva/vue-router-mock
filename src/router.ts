@@ -221,6 +221,9 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     return pendingNavigation || Promise.resolve()
   }
 
+  // for all these functions we set the whole currentRoute to mimic router
+  // behavior: each navigation replaces the whole `currentRoute` object
+
   function setParams(params: RouteParamsRaw) {
     router.currentRoute.value = router.resolve({ params })
     return nextTick()
