@@ -17,6 +17,14 @@ describe('Navigations', () => {
     expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1)
   })
 
+  it('can check calls on push even if the route is not declared', async () => {
+    const wrapper = mount(Test)
+
+    wrapper.vm.$router.push({ name: 'hey' })
+    expect(wrapper.vm.$router.push).toHaveBeenCalledWith({ name: 'hey' })
+    expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1)
+  })
+
   it('can check calls on replace', async () => {
     const wrapper = mount(Test)
 

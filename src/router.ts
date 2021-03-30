@@ -74,14 +74,25 @@ export interface RouterMockOptions extends Partial<RouterOptions> {
    * START_LOCATION.
    */
   initialLocation?: RouteLocationRaw
+
   /**
    * Run in-component guards. Defaults to false
    */
   runInComponentGuards?: boolean
+
   /**
    * Run per-route guards. Defaults to false
    */
   runPerRouteGuards?: boolean
+
+  /**
+   * By default the mock will allow you to push to locations without adding all
+   * the necessary routes so you can still check if `router.push()` was called
+   * in a specific scenario
+   * (https://github.com/posva/vue-router-mock/issues/41). Set this to `true` to
+   * disable that behavior and throw when `router.push()` fails.
+   */
+  noUndeclaredRoutes?: boolean
 }
 
 /**
@@ -101,7 +112,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     ...options,
   })
 
-  let { runPerRouteGuards, runInComponentGuards } = options
+  let { runPerRouteGuards, runInComponentGuards, noUndeclaredRoutes } = options
   const initialLocation = options.initialLocation || START_LOCATION
 
   const { push, addRoute, replace } = router
@@ -191,8 +202,17 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
       return pendingNavigation
     }
 
-    // NOTE: should we trigger a push to reset the internal pending navigation of the router?
-    router.currentRoute.value = router.resolve(to)
+    // we try to resolve the navigation
+    // but catch the error to simplify testing and avoid having to declare
+    // all the routes in the mock router
+    try {
+      // NOTE: should we trigger a push to reset the internal pending navigation of the router?
+      router.currentRoute.value = router.resolve(to)
+    } catch (error) {
+      if (noUndeclaredRoutes) {
+        throw error
+      }
+    }
     return Promise.resolve()
   }
 
