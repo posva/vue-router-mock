@@ -7,9 +7,9 @@
 ## Installation
 
 ```sh
-yarn add vue-router-mock@2
+yarn add vue-router-mock
 # or
-npm install vue-router-mock@2
+npm install vue-router-mock
 ```
 
 ## Requirements
