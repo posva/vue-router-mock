@@ -40,7 +40,7 @@
     "@rollup/plugin-replace": "^3.0.0",
     "@size-limit/preset-small-lib": "^5.0.1",
     "@sucrase/jest-plugin": "^2.1.0",
-    "@types/jest": "^26.0.23",
+    "@types/jest": "^27.0.1",
     "@types/jsdom": "^16.2.11",
     "@vue/test-utils": "^2.0.0-rc.6",
     "codecov": "^3.8.2",
