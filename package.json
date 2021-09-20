@@ -45,7 +45,7 @@
     "@vue/test-utils": "^2.0.0-rc.6",
     "codecov": "^3.8.2",
     "conventional-changelog-cli": "^2.1.1",
-    "jest": "^26.6.3",
+    "jest": "^27.2.1",
     "lint-staged": "^11.0.0",
     "pascalcase": "^1.0.0",
     "prettier": "^2.3.1",
