@@ -55,7 +55,7 @@ Then add this line to your `jest.config.js`:
 This will inject a router in all your tests. If for specific tests, you need to inject a different version of the router, you can do so:
 
 ```js
-import { createRouterMock, injectRouterMock } from "vue-router-mock"
+import { createRouterMock, injectRouterMock } from 'vue-router-mock'
 
 describe('SearchUsers', () => {
   // create one mock instance, pass options
