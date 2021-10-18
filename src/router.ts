@@ -112,6 +112,9 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     ...options,
   })
 
+  // add a default onError to avoid logging a warning
+  router.onError(() => {})
+
   let { runPerRouteGuards, runInComponentGuards, noUndeclaredRoutes } = options
   const initialLocation = options.initialLocation || START_LOCATION
 
