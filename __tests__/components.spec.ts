@@ -5,13 +5,11 @@ describe('components', () => {
     const wrapper = mount(
       {
         template: `<router-link to="/">Hello</router-link>`,
-      }
-      // { global: { stubs: { RouterLink: true } } }
+      },
+      { global: { stubs: { RouterLink: true } } }
     )
 
-    expect(wrapper.html()).toMatchInlineSnapshot(
-      `"<router-link-stub to=\\"/\\"></router-link-stub>"`
-    )
+    expect(wrapper.html()).toMatch(/router-link-stub/)
   })
 
   it('can use real router-link', async () => {
