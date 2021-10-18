@@ -2,7 +2,7 @@
 
 > Easily mock routing interactions in your Vue 3 apps
 
-**⚠️ This library intends to be a collaboration of people writing tests to create a better experience writing tests that involve the use of routing with Vue.** Your feedback and experienced is welcomed in issues and discussions to give the API shape and create a library that eases unit testing components that deal with the router.
+**⚠️ This library intends to be a collaboration of people writing tests to create a better experience writing tests that involve the use of routing with Vue.** Your feedback and experience is welcomed in issues and discussions to give the API shape and create a library that eases unit testing components that deal with the router.
 
 ## Installation
 
@@ -77,7 +77,9 @@ describe('SearchUsers', () => {
     // this will internally trigger `router.push({ query: { page: 2 }})`
     wrapper.find('button.next-page').click()
 
-    expect(wrapper.router.push).toHaveBeenCalledWith(expect.objectContaining({ query: { page: 2 } }))
+    expect(wrapper.router.push).toHaveBeenCalledWith(
+      expect.objectContaining({ query: { page: 2 } })
+    )
     expect(wrapper.router.push).toHaveBeenCalledTimes(1)
 
     // if we had a navigation guard fetching the search results,
@@ -89,7 +91,6 @@ describe('SearchUsers', () => {
     await wrapper.vm.nextTick()
 
     expect(wrapper.find('#user-results .user').text()).toMatchSnapshot()
-
   })
 })
 ```
