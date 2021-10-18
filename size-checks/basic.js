@@ -1,1 +1,7 @@
-export * from '../dist/vue-router-mock.esm-bundler'
+import {
+  getRouter,
+  createRouterMock,
+} from '../dist/vue-router-mock.esm-bundler'
+
+createRouterMock()
+getRouter()

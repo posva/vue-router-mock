@@ -72,7 +72,11 @@
   },
   "size-limit": [
     {
-      "path": "size-checks/basic.js"
+      "path": "size-checks/basic.js",
+      "ignore": [
+        "vue",
+        "@vue/test-utils"
+      ]
     }
   ],
   "peerDependencies": {
