@@ -37,8 +37,15 @@ export function injectRouterMock(router?: RouterMock) {
   config.global.components.RouterView = RouterView
   config.global.components.RouterLink = RouterLink
 
-  config.global.stubs.RouterLink = true
-  config.global.stubs.RouterView = true
+  // TODO: remove if https://github.com/vuejs/vue-test-utils-next/issues/1023
+  // gets merged
+  if (Array.isArray(config.global.stubs)) {
+    config.global.stubs.push('RouterLink')
+    config.global.stubs.push('RouterView')
+  } else {
+    config.global.stubs.RouterLink = true
+    config.global.stubs.RouterView = true
+  }
 
   return { router, route }
 }
