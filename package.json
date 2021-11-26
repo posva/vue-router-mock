@@ -15,12 +15,11 @@
     "build:dts": "tail -n +2 src/globalExtensions.ts >> dist/index.d.ts",
     "release": "bash scripts/release.sh",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1",
-    "size": "size-limit",
     "lint": "prettier -c --parser typescript \"{src,__tests__,e2e}/**/*.[jt]s?(x)\"",
-    "lint:fix": "yarn run lint --write",
+    "lint:fix": "pnpm run lint --write",
     "test:types": "tsc --build tsconfig.json",
     "test:unit": "jest --coverage",
-    "test": "yarn run test:types && yarn run test:unit && yarn run build && yarn run build:dts"
+    "test": "pnpm run test:types && pnpm run test:unit && pnpm run build && pnpm run build:dts"
   },
   "files": [
     "dist/*.cjs",
