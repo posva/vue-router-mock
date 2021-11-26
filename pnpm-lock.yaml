@@ -13,7 +13,7 @@ specifiers:
   lint-staged: ^12.1.1
   minimist: ^1.2.5
   prettier: ^2.4.1
-  publie: ^0.0.1
+  publie: ^0.0.2
   semver: ^7.3.5
   typescript: ^4.5.2
   unbuild: ^0.5.13
@@ -34,7 +34,7 @@ devDependencies:
   lint-staged: 12.1.2
   minimist: 1.2.5
   prettier: 2.5.0
-  publie: 0.0.1_prettier@2.5.0
+  publie: 0.0.2_prettier@2.5.0
   semver: 7.3.5
   typescript: 4.5.2
   unbuild: 0.5.13
@@ -3699,8 +3699,8 @@ packages:
     resolution: {integrity: sha512-RIdOzyoavK+hA18OGGWDqUTsCLhtA7IcZ/6NCs4fFJaHBDab+pDDmDIByWFRQJq2Cd7r1OoQxBGKOaztq+hjIQ==}
     dev: true
 
-  /publie/0.0.1_prettier@2.5.0:
-    resolution: {integrity: sha512-39t5lNPIaJgBqEtYA+Z/ihb9x7fqJ2bzPdeKq/51pIlDtHZI40MHGyUep/0Jy26ZD93OgFpGBMHp+ECzoDN0Nw==}
+  /publie/0.0.2_prettier@2.5.0:
+    resolution: {integrity: sha512-4+UoKVfk8QCrMOjWSzeojYsIgiDuGGqiwjIwZaoDbF3aAzBgW9RVgzSJXmGZu8a7tZp5iOaCdcvuimTcfG5cxg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
     peerDependencies:
