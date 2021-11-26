@@ -75,6 +75,13 @@ export interface RouterMock extends Router {
   reset(): void
 }
 
+/**
+ * TODO: Allow passing a custom spy and detect common global ones like jest and cypress.
+ */
+
+/**
+ * Options passed to `createRouterMock()`.
+ */
 export interface RouterMockOptions extends Partial<RouterOptions> {
   /**
    * Override the starting location before each test. Defaults to
@@ -83,14 +90,25 @@ export interface RouterMockOptions extends Partial<RouterOptions> {
   initialLocation?: RouteLocationRaw
 
   /**
-   * Run in-component guards. Defaults to false
+   * Run in-component guards. Defaults to false.
+   * @deprecated use `useRealNavigation` instead
    */
   runInComponentGuards?: boolean
+  /**
+   * Runs all navigation through a `push()` or `replace()` to effectively run any global and per-component navigation
+   * guard.
+   */
+  useRealNavigation?: boolean
 
   /**
-   * Run per-route guards. Defaults to false
+   * Run per-route guards. Defaults to false.
+   * @deprecated use `removePerRouteGuards` instead
    */
   runPerRouteGuards?: boolean
+  /**
+   * Removes `beforeEnter` guards to any route added. Defaults to `true`.
+   */
+  removePerRouteGuards?: boolean
 
   /**
    * By default the mock will allow you to push to locations without adding all
@@ -122,7 +140,13 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   // add a default onError to avoid logging a warning
   router.onError(() => {})
 
-  let { runPerRouteGuards, runInComponentGuards, noUndeclaredRoutes } = options
+  let {
+    runPerRouteGuards,
+    removePerRouteGuards,
+    runInComponentGuards,
+    useRealNavigation,
+    noUndeclaredRoutes,
+  } = options
   const initialLocation = options.initialLocation || START_LOCATION
 
   const { push, addRoute, replace } = router
@@ -134,7 +158,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     ) => {
       record = record || (parentRecordName as RouteRecordRaw)
 
-      if (!runPerRouteGuards) {
+      if (!runPerRouteGuards || removePerRouteGuards) {
         // remove existing records to force our own router.beforeEach and easier
         // way to mock navigation guard returns.
         delete record.beforeEnter
@@ -156,8 +180,6 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   router.push = pushMock
   router.replace = replaceMock
   router.addRoute = addRouteMock
-
-  // TODO: faire codecov change comme dans pinia
 
   function reset() {
     pushMock.mockClear()
@@ -183,7 +205,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     to: RouteLocationRaw,
     options: { replace?: boolean } = {}
   ) {
-    if (nextReturn != null || runInComponentGuards) {
+    if (nextReturn != null || runInComponentGuards || useRealNavigation) {
       const removeGuard = router.beforeEach(() => {
         const value = nextReturn
         removeGuard()

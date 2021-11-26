@@ -55,6 +55,18 @@ describe('Navigations', () => {
     })
   })
 
+  describe('global guards', () => {
+    it('runs beforeEach', async () => {
+      const guard = jest.fn()
+      const router = createRouterMock({ useRealNavigation: true })
+      injectRouterMock(router)
+      router.beforeEach(guard)
+      mount(Test)
+      await router.push('/')
+      expect(guard).toHaveBeenCalledTimes(1)
+    })
+  })
+
   describe('per-router guards', () => {
     it('ignored by default', async () => {
       const beforeEnter = jest.fn()
