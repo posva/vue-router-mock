@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/posva/vue-router-mock/compare/v0.1.0...v0.1.1) (2021-11-26)
+
+### Features
+
+- add useRealNavigation, deprecate runRealNavigation and runPerRouteGuards ([714ab14](https://github.com/posva/vue-router-mock/commit/714ab14cae6fbb7d81dcd0388dedf5a5e7a5ba96))
+- wip ([1687c09](https://github.com/posva/vue-router-mock/commit/1687c0924cebfdf657154fba57aa744e428790f2))
+
 # [0.1.0](https://github.com/posva/vue-router-mock/compare/v0.0.3...v0.1.0) (2021-10-18)
 
 ### Bug Fixes
