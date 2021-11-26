@@ -1,3 +1,9 @@
+## [0.1.2](https://github.com/posva/vue-router-mock/compare/v0.1.1...v0.1.2) (2021-11-26)
+
+### Features
+
+- undeprecate runInComponentGuards ([816f5fa](https://github.com/posva/vue-router-mock/commit/816f5fa397277a24f904e77e29b6027c64557d64))
+
 ## [0.1.1](https://github.com/posva/vue-router-mock/compare/v0.1.0...v0.1.1) (2021-11-26)
 
 ### Features
