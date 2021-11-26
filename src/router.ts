@@ -149,7 +149,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   } = options
   const initialLocation = options.initialLocation || START_LOCATION
 
-  const { push, addRoute, replace } = router
+  const { push, addRoute, replace, beforeEach, beforeResolve } = router
 
   const addRouteMock = jest.fn(
     (
@@ -181,10 +181,25 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   router.replace = replaceMock
   router.addRoute = addRouteMock
 
+  let guardRemovers: Array<() => void> = []
+  router.beforeEach = (...args) => {
+    const removeGuard = beforeEach(...args)
+    guardRemovers.push(removeGuard)
+    return removeGuard
+  }
+  router.beforeResolve = (...args) => {
+    const removeGuard = beforeResolve(...args)
+    guardRemovers.push(removeGuard)
+    return removeGuard
+  }
+
   function reset() {
     pushMock.mockClear()
     replaceMock.mockClear()
     addRouteMock.mockClear()
+
+    guardRemovers.forEach((remove) => remove())
+    guardRemovers = []
 
     nextReturn = undefined
     router.currentRoute.value =
