@@ -4,6 +4,7 @@ const { config } = require('@vue/test-utils')
 const router = createRouterMock()
 
 beforeEach(() => {
+  router.reset()
   injectRouterMock(router)
 })
 

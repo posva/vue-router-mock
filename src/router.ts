@@ -1,4 +1,5 @@
-import { Component, nextTick, Ref, ref } from 'vue'
+import { defineComponent, nextTick, ref } from 'vue'
+import type { Ref } from 'vue'
 import {
   createMemoryHistory,
   createRouter,
@@ -11,10 +12,10 @@ import {
   START_LOCATION,
 } from 'vue-router'
 
-export const EmptyView: Component = {
+export const EmptyView = defineComponent({
   name: 'RouterMockEmptyView',
   render: () => null,
-}
+})
 
 /**
  * Router Mock instance
@@ -66,6 +67,12 @@ export interface RouterMock extends Router {
    * @param hash - hash to set in the current route
    */
   setHash(hash: string): Promise<void>
+
+  /**
+   * Clear all the mocks and reset the location of the router. This is useful to be called in a `beforeEach()` test hook
+   * to reset the router state before each test.
+   */
+  reset(): void
 }
 
 export interface RouterMockOptions extends Partial<RouterOptions> {
@@ -150,7 +157,9 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   router.replace = replaceMock
   router.addRoute = addRouteMock
 
-  beforeEach(() => {
+  // TODO: faire codecov change comme dans pinia
+
+  function reset() {
     pushMock.mockClear()
     replaceMock.mockClear()
     addRouteMock.mockClear()
@@ -160,7 +169,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
       initialLocation === START_LOCATION
         ? START_LOCATION
         : router.resolve(initialLocation)
-  })
+  }
 
   let nextReturn: Error | boolean | RouteLocationRaw | undefined = undefined
 
@@ -244,6 +253,9 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
 
   const depth = ref(0)
 
+  // sets the initial location
+  reset()
+
   return {
     ...router,
     depth,
@@ -252,5 +264,6 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     setParams,
     setQuery,
     setHash,
+    reset,
   }
 }

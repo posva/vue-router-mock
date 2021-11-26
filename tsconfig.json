@@ -18,7 +18,8 @@
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "strict": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
+    "skipLibCheck": true,
 
     "experimentalDecorators": true,
     "resolveJsonModule": true,

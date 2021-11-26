@@ -1,6 +1,8 @@
-import { config, VueWrapper } from '@vue/test-utils'
+import { config } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
 import { routerKey } from 'vue-router'
-import { RouterMock } from './router'
+import type { RouterMock } from './router'
+import './globalExtensions'
 
 export function plugin(
   wrapper: VueWrapper<any>
@@ -24,7 +26,8 @@ export function plugin(
   const router: RouterMock = getRouter()
 
   // set all instances when installing the plugin
-  router.currentRoute.value.matched.forEach((record) => {
+  // TODO: WTF needs any at build
+  router.currentRoute.value.matched.forEach((record: any) => {
     for (const name in record.components) {
       record.instances[name] = wrapper.vm
     }
