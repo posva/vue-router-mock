@@ -1,5 +1,4 @@
 import { RouterMock } from './router'
-
 import { ComponentPublicInstance } from 'vue'
 
 declare module '@vue/test-utils' {

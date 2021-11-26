@@ -2,11 +2,9 @@
   "name": "vue-router-mock",
   "version": "0.1.0",
   "description": "Easily test your components by mocking the router",
-  "main": "dist/vue-router-mock.cjs.js",
-  "unpkg": "dist/vue-router-mock.global.js",
-  "jsdelivr": "dist/vue-router-mock.global.js",
-  "module": "dist/vue-router-mock.esm-bundler.js",
-  "types": "dist/vue-router-mock.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "sideEffects": false,
   "author": {
     "name": "Eduardo San Martin Morote",
@@ -14,7 +12,7 @@
   },
   "scripts": {
     "build": "unbuild",
-    "build:dts": "api-extractor run --local --verbose && tail -n +2 src/globalExtensions.ts >> dist/vue-router-mock.d.ts",
+    "build:dts": "tail -n +2 src/globalExtensions.ts >> dist/index.d.ts",
     "release": "bash scripts/release.sh",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1",
     "size": "size-limit",
@@ -25,8 +23,9 @@
     "test": "yarn run test:types && yarn run test:unit && yarn run build && yarn run build:dts"
   },
   "files": [
-    "dist/*.js",
-    "dist/vue-router-mock.d.ts",
+    "dist/*.cjs",
+    "dist/*.mjs",
+    "dist/*.d.ts",
     "LICENSE",
     "README.md"
   ],
