@@ -90,13 +90,13 @@ export interface RouterMockOptions extends Partial<RouterOptions> {
   initialLocation?: RouteLocationRaw
 
   /**
-   * Run in-component guards. Defaults to false.
-   * @deprecated use `useRealNavigation` instead
+   * Run in-component guards. Defaults to false. Setting this to `true` will also run global guards as if
+   * `useRealNavigation` was set to `true`.
    */
   runInComponentGuards?: boolean
+
   /**
-   * Runs all navigation through a `push()` or `replace()` to effectively run any global and per-component navigation
-   * guard.
+   * Runs all navigation through a `push()` or `replace()` to effectively run any global.
    */
   useRealNavigation?: boolean
 
