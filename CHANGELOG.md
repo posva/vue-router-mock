@@ -1,3 +1,10 @@
+## [0.1.3](https://github.com/posva/vue-router-mock/compare/v0.1.2...v0.1.3) (2021-12-09)
+
+### Features
+
+- cleanup guards in reset ([3e07bd3](https://github.com/posva/vue-router-mock/commit/3e07bd33e20445a4fa0e0c937b9246c589404ea4))
+- detect global sinon to support peeky ([f2bb5a7](https://github.com/posva/vue-router-mock/commit/f2bb5a7a1c5d053171ff9c06a1acb830695c3fa5))
+
 ## [0.1.2](https://github.com/posva/vue-router-mock/compare/v0.1.1...v0.1.2) (2021-11-26)
 
 ### Features
