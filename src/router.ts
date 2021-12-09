@@ -11,11 +11,48 @@ import {
   RouterOptions,
   START_LOCATION,
 } from 'vue-router'
+import type { SinonStatic } from 'sinon'
 
 export const EmptyView = defineComponent({
   name: 'RouterMockEmptyView',
   render: () => null,
 })
+
+declare const sinon: SinonStatic | undefined
+function getSinonGlobal() {
+  return typeof sinon !== 'undefined' && sinon
+}
+
+function getJestGlobal() {
+  return typeof jest !== 'undefined' && jest
+}
+
+/**
+ * Creates a spy on a function and allows clearing the mock.
+ *
+ * @param fn function to spy on
+ * @returns [spy, mockClear()]
+ */
+function createSpy<Fn extends (...args: any[]) => any>(
+  fn: Fn
+): [Fn, () => void] {
+  const sinon = getSinonGlobal()
+  if (sinon) {
+    const spy = sinon.spy(fn)
+    return [spy as unknown as Fn, () => spy.resetHistory()]
+  }
+
+  const jest = getJestGlobal()
+  if (jest) {
+    const spy = jest.fn(fn)
+    return [spy as unknown as Fn, () => spy.mockClear()]
+  }
+
+  console.error(
+    `Couldn't detect a global spy (tried jest and sinon). Make sure to provide a "createSpy" option when creating the router mock.`
+  )
+  throw new Error('No Spy Available')
+}
 
 /**
  * Router Mock instance
@@ -151,7 +188,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
 
   const { push, addRoute, replace, beforeEach, beforeResolve } = router
 
-  const addRouteMock = jest.fn(
+  const [addRouteMock, addRouteMockClear] = createSpy(
     (
       parentRecordName: Required<RouteRecordRaw>['name'] | RouteRecordRaw,
       record?: RouteRecordRaw
@@ -169,11 +206,11 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     }
   )
 
-  const pushMock = jest.fn((to: RouteLocationRaw) => {
+  const [pushMock, pushMockClear] = createSpy((to: RouteLocationRaw) => {
     return consumeNextReturn(to)
   })
 
-  const replaceMock = jest.fn((to: RouteLocationRaw) => {
+  const [replaceMock, replaceMockClear] = createSpy((to: RouteLocationRaw) => {
     return consumeNextReturn(to, { replace: true })
   })
 
@@ -194,9 +231,9 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   }
 
   function reset() {
-    pushMock.mockClear()
-    replaceMock.mockClear()
-    addRouteMock.mockClear()
+    pushMockClear()
+    replaceMockClear()
+    addRouteMockClear()
 
     guardRemovers.forEach((remove) => remove())
     guardRemovers = []
