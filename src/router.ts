@@ -160,15 +160,15 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   // TODO: faire codecov change comme dans pinia
 
   function reset() {
-    pushMock.mockClear()
-    replaceMock.mockClear()
-    addRouteMock.mockClear()
-
     nextReturn = undefined
     router.currentRoute.value =
       initialLocation === START_LOCATION
         ? START_LOCATION
         : router.resolve(initialLocation)
+
+    pushMock.mockClear()
+    replaceMock.mockClear()
+    addRouteMock.mockClear()
   }
 
   let nextReturn: Error | boolean | RouteLocationRaw | undefined = undefined
@@ -207,7 +207,10 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
 
       pendingNavigation = (options.replace ? replace : push)(to)
       pendingNavigation
-        .catch(() => {})
+        .catch((err) => {
+          console.error('[vue-router-mock]: Unexpected error during push.')
+          console.error(err)
+        })
         .finally(() => {
           pendingNavigation = undefined
         })
