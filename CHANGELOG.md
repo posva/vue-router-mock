@@ -1,3 +1,10 @@
+## [0.1.4](https://github.com/posva/vue-router-mock/compare/v0.1.3...v0.1.4) (2022-01-21)
+
+### Features
+
+- create and restore spies with other test frameworks ([#144](https://github.com/posva/vue-router-mock/issues/144)) ([b7fd685](https://github.com/posva/vue-router-mock/commit/b7fd685c03a72f767b50fa4c5ed4e45f0385f5a3))
+- Add support to vitest
+
 ## [0.1.3](https://github.com/posva/vue-router-mock/compare/v0.1.2...v0.1.3) (2021-12-09)
 
 ### Features
