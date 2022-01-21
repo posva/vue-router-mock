@@ -11,68 +11,12 @@ import {
   RouterOptions,
   START_LOCATION,
 } from 'vue-router'
-import type { SinonSpy, SinonStatic } from 'sinon'
+import { createSpy, RouterMockSpyOptions, _InferSpyType } from './autoSpy'
 
 export const EmptyView = defineComponent({
   name: 'RouterMockEmptyView',
   render: () => null,
 })
-
-declare const sinon: SinonStatic | undefined
-function getSinonGlobal() {
-  return typeof sinon !== 'undefined' && sinon
-}
-
-function getJestGlobal() {
-  return typeof jest !== 'undefined' && jest
-}
-
-/**
- * Creates a spy on a function
- *
- * @param fn function to spy on
- * @returns spy
- */
-function createSpyAuto<Fn extends (...args: any[]) => any>(fn: Fn): Fn {
-  const sinon = getSinonGlobal()
-  if (sinon) {
-    return sinon.spy(fn) as unknown as Fn
-  }
-
-  const jest = getJestGlobal()
-  if (jest) {
-    return jest.fn(fn) as unknown as Fn
-  }
-
-  console.error(
-    `Couldn't detect a global spy (tried jest and sinon). Make sure to provide a "spy.create" option when creating the router mock.`
-  )
-  throw new Error('No Spy Available')
-}
-
-/**
- * Restores a mock
- *
- * @param spy the spy to restore
- */
-function restoreSpyAuto<Fn extends (...args: any[]) => any>(
-  spy: Fn
-): () => void {
-  const sinon = getSinonGlobal()
-  if (sinon) {
-    return () => (spy as unknown as SinonSpy).resetHistory()
-  }
-
-  const jest = getJestGlobal()
-  if (jest) {
-    return () => (spy as unknown as jest.Mock).mockClear()
-  }
-
-  console.error(
-    `Couldn't detect a global spy (tried jest and sinon). Make sure to provide a "spy.restore" option when creating the router mock.`
-  )
-  throw new Error('No Spy Available')
-}
 
 /**
  * Router Mock instance
@@ -130,26 +74,12 @@ export interface RouterMock extends Router {
    * to reset the router state before each test.
    */
   reset(): void
+
+  push: _InferSpyType<Router['push']>
+  replace: _InferSpyType<Router['replace']>
+  // FIXME: it doesn't seem to work for overloads
+  // addRoute: _InferSpyType<Router['addRoute']>
 }
-
-/**
- * Options passed to the `spy` option of the `createRouterMock` function
- */
-export interface RouterMockSpyOptions {
-  /**
-   * Creates a spy (for example, `create: fn => vi.fn(fn)` with vitest)
-   */
-  create: (...args: any[]) => any
-
-  /**
-   * function to restore a spy (for example, `restore: spy => () => spy.restore()` with vitest)
-   */
-  restore: (spy: any) => () => void
-}
-
-/**
- * TODO: Allow passing a custom spy and detect common global ones like jest and cypress.
- */
 
 /**
  * Options passed to `createRouterMock()`.
@@ -234,15 +164,13 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     runInComponentGuards,
     useRealNavigation,
     noUndeclaredRoutes,
+    spy,
   } = options
   const initialLocation = options.initialLocation || START_LOCATION
 
   const { push, addRoute, replace, beforeEach, beforeResolve } = router
 
-  const createSpy = options.spy?.create ?? createSpyAuto
-  const restoreSpy = options.spy?.restore ?? restoreSpyAuto
-
-  const addRouteMock = createSpy(
+  const [addRouteMock, addRouteMockClear] = createSpy(
     (
       parentRecordName: Required<RouteRecordRaw>['name'] | RouteRecordRaw,
       record?: RouteRecordRaw
@@ -257,22 +185,17 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
 
       // @ts-ignore: this should be valid
       return addRoute(parentRecordName, record)
-    }
+    },
+    spy
   )
 
-  const addRouteMockClear = restoreSpy(addRouteMock)
-
-  const pushMock = createSpy((to: RouteLocationRaw) => {
+  const [pushMock, pushMockClear] = createSpy((to: RouteLocationRaw) => {
     return consumeNextReturn(to)
-  })
+  }, spy)
 
-  const pushMockClear = restoreSpy(pushMock)
-
-  const replaceMock = createSpy((to: RouteLocationRaw) => {
+  const [replaceMock, replaceMockClear] = createSpy((to: RouteLocationRaw) => {
     return consumeNextReturn(to, { replace: true })
-  })
-
-  const replaceMockClear = restoreSpy(replaceMock)
+  }, spy)
 
   router.push = pushMock
   router.replace = replaceMock
@@ -392,6 +315,9 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
 
   return {
     ...router,
+    push: pushMock,
+    replace: replaceMock,
+    addRoute: addRouteMock,
     depth,
     setNextGuardReturn,
     getPendingNavigation,

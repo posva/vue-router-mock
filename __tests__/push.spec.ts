@@ -1,4 +1,11 @@
+import { _InferSpyType } from '../src/autoSpy'
 import { getRouter, createRouterMock } from '../src'
+
+declare module '../src' {
+  interface RouterMockSpy<Fn> {
+    // spy: jest.Mock<ReturnType<Fn>, Parameters<Fn>>
+  }
+}
 
 describe('router.push mock', () => {
   it('still calls push for non valid routes', async () => {
