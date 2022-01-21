@@ -1,5 +1,6 @@
 import { getJestGlobal } from './testers/jest'
 import { getSinonGlobal } from './testers/sinon'
+import { getVitestGlobal } from './testers/vitest'
 
 /**
  * Creates a spy on a function
@@ -22,7 +23,7 @@ export function createSpy<Fn extends (...args: any[]) => any>(
     return [spy as unknown as _InferSpyType<Fn>, () => spy.resetHistory()]
   }
 
-  const jest = getJestGlobal()
+  const jest = getVitestGlobal() || getJestGlobal()
   if (jest) {
     const spy = jest.fn(fn)
     return [spy as unknown as _InferSpyType<Fn>, () => spy.mockClear()]
