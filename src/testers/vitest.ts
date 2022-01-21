@@ -1,6 +1,5 @@
-import type { vi as Vi } from 'vitest'
-
-declare const vi: typeof Vi | undefined
+// cannot import the actual typ
+declare const vi: typeof jest
 
 export function getVitestGlobal() {
   return typeof vi !== 'undefined' && vi
