@@ -11,48 +11,12 @@ import {
   RouterOptions,
   START_LOCATION,
 } from 'vue-router'
-import type { SinonStatic } from 'sinon'
+import { createSpy, RouterMockSpyOptions, _InferSpyType } from './autoSpy'
 
 export const EmptyView = defineComponent({
   name: 'RouterMockEmptyView',
   render: () => null,
 })
-
-declare const sinon: SinonStatic | undefined
-function getSinonGlobal() {
-  return typeof sinon !== 'undefined' && sinon
-}
-
-function getJestGlobal() {
-  return typeof jest !== 'undefined' && jest
-}
-
-/**
- * Creates a spy on a function and allows clearing the mock.
- *
- * @param fn function to spy on
- * @returns [spy, mockClear()]
- */
-function createSpy<Fn extends (...args: any[]) => any>(
-  fn: Fn
-): [Fn, () => void] {
-  const sinon = getSinonGlobal()
-  if (sinon) {
-    const spy = sinon.spy(fn)
-    return [spy as unknown as Fn, () => spy.resetHistory()]
-  }
-
-  const jest = getJestGlobal()
-  if (jest) {
-    const spy = jest.fn(fn)
-    return [spy as unknown as Fn, () => spy.mockClear()]
-  }
-
-  console.error(
-    `Couldn't detect a global spy (tried jest and sinon). Make sure to provide a "createSpy" option when creating the router mock.`
-  )
-  throw new Error('No Spy Available')
-}
 
 /**
  * Router Mock instance
@@ -110,11 +74,12 @@ export interface RouterMock extends Router {
    * to reset the router state before each test.
    */
   reset(): void
-}
 
-/**
- * TODO: Allow passing a custom spy and detect common global ones like jest and cypress.
- */
+  push: _InferSpyType<Router['push']>
+  replace: _InferSpyType<Router['replace']>
+  // FIXME: it doesn't seem to work for overloads
+  // addRoute: _InferSpyType<Router['addRoute']>
+}
 
 /**
  * Options passed to `createRouterMock()`.
@@ -155,6 +120,22 @@ export interface RouterMockOptions extends Partial<RouterOptions> {
    * disable that behavior and throw when `router.push()` fails.
    */
   noUndeclaredRoutes?: boolean
+
+  /**
+   * By default the mock will use sinon or jest support to create and restore spies.
+   * This option allows to use a different testing framework,
+   * by providing a method to create spies, and one to restore them.
+   * For example, with vitest:
+   * ```
+   * const router = createRouterMock({
+   *   spy: {
+   *     create: fn => vi.fn(fn),
+   *     restore: spy => () => spy.restore()
+   *   }
+   * });
+   * ```
+   */
+  spy?: RouterMockSpyOptions
 }
 
 /**
@@ -183,6 +164,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     runInComponentGuards,
     useRealNavigation,
     noUndeclaredRoutes,
+    spy,
   } = options
   const initialLocation = options.initialLocation || START_LOCATION
 
@@ -203,16 +185,17 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
 
       // @ts-ignore: this should be valid
       return addRoute(parentRecordName, record)
-    }
+    },
+    spy
   )
 
   const [pushMock, pushMockClear] = createSpy((to: RouteLocationRaw) => {
     return consumeNextReturn(to)
-  })
+  }, spy)
 
   const [replaceMock, replaceMockClear] = createSpy((to: RouteLocationRaw) => {
     return consumeNextReturn(to, { replace: true })
-  })
+  }, spy)
 
   router.push = pushMock
   router.replace = replaceMock
@@ -332,6 +315,9 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
 
   return {
     ...router,
+    push: pushMock,
+    replace: replaceMock,
+    addRoute: addRouteMock,
     depth,
     setNextGuardReturn,
     getPendingNavigation,
