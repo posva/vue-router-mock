@@ -1,3 +1,9 @@
+## [0.1.5](https://github.com/posva/vue-router-mock/compare/v0.1.4...v0.1.5) (2022-01-22)
+
+### Bug Fixes
+
+- remove unused option for spying ([28a334c](https://github.com/posva/vue-router-mock/commit/28a334c713025f925750b6a2df9aa461e9b646e9))
+
 ## [0.1.4](https://github.com/posva/vue-router-mock/compare/v0.1.3...v0.1.4) (2022-01-21)
 
 ### Features
