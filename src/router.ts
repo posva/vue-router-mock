@@ -122,15 +122,19 @@ export interface RouterMockOptions extends Partial<RouterOptions> {
   noUndeclaredRoutes?: boolean
 
   /**
-   * By default the mock will use sinon or jest support to create and restore spies.
-   * This option allows to use a different testing framework,
-   * by providing a method to create spies, and one to restore them.
-   * For example, with vitest:
-   * ```
+   * By default the mock will use sinon, jest, or vitest support to create and reset spies. This option allows to use
+   * any testing library with its own spies, by providing a method to create spies, and one to reset them them. Check
+   * the `RouterMockSpy` type to add your own type.
+   *
+   * @example
+   *
+   * For example, with vitest with `globals: false`:
+   *
+   * ```ts
    * const router = createRouterMock({
    *   spy: {
    *     create: fn => vi.fn(fn),
-   *     restore: spy => () => spy.restore()
+   *     reset: spy => spy.mockReset()
    *   }
    * });
    * ```

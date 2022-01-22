@@ -48,11 +48,6 @@ export interface RouterMockSpyOptions {
    * Resets a spy but keeps it active.
    */
   reset: (spy: _InferSpyType) => void
-
-  /**
-   * Restores the original function given to the spy.
-   */
-  restore: (spy: _InferSpyType) => void
 }
 
 /**
