@@ -1,3 +1,5 @@
+## [0.1.7](https://github.com/posva/vue-router-mock/compare/v0.1.6...v0.1.7) (2022-01-23)
+
 ## [0.1.6](https://github.com/posva/vue-router-mock/compare/v0.1.5...v0.1.6) (2022-01-23)
 
 ### Bug Fixes
