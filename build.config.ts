@@ -2,8 +2,9 @@ import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
   entries: ['./src/index'],
-  // cjsBridge: false,
-  // emitCJS: false,
   declaration: true,
+  rollup: {
+    emitCJS: true,
+  },
   externals: ['vue', 'vue-router', '@vue/test-utils'],
 })
