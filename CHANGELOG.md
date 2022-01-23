@@ -1,3 +1,9 @@
+## [0.1.6](https://github.com/posva/vue-router-mock/compare/v0.1.5...v0.1.6) (2022-01-23)
+
+### Bug Fixes
+
+- **build:** add cjs version ([4ab0b34](https://github.com/posva/vue-router-mock/commit/4ab0b34f2a774cd748d3790d8f824a5a63fd36be)), closes [#145](https://github.com/posva/vue-router-mock/issues/145)
+
 ## [0.1.5](https://github.com/posva/vue-router-mock/compare/v0.1.4...v0.1.5) (2022-01-22)
 
 ### Bug Fixes
