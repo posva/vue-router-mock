@@ -11,16 +11,16 @@ specifiers:
   enquirer: ^2.3.6
   execa: ^6.1.0
   jest: ^27.5.1
-  lint-staged: ^12.3.4
+  lint-staged: ^12.3.5
   minimist: ^1.2.5
   prettier: ^2.5.1
   publie: ^0.0.2
   semver: ^7.3.5
   sinon: ^13.0.1
-  typescript: ^4.5.5
+  typescript: ^4.6.2
   unbuild: ^0.6.9
   vue: ^3.2.31
-  vue-router: ^4.0.12
+  vue-router: ^4.0.13
   yorkie: ^2.0.0
 
 devDependencies:
@@ -34,16 +34,16 @@ devDependencies:
   enquirer: 2.3.6
   execa: 6.1.0
   jest: 27.5.1
-  lint-staged: 12.3.4_enquirer@2.3.6
+  lint-staged: 12.3.5_enquirer@2.3.6
   minimist: 1.2.5
   prettier: 2.5.1
   publie: 0.0.2_prettier@2.5.1
   semver: 7.3.5
   sinon: 13.0.1
-  typescript: 4.5.5
+  typescript: 4.6.2
   unbuild: 0.6.9
   vue: 3.2.31
-  vue-router: 4.0.12_vue@3.2.31
+  vue-router: 4.0.13_vue@3.2.31
   yorkie: 2.0.0
 
 packages:
@@ -909,8 +909,8 @@ packages:
       '@vue/shared': 3.2.31
     dev: true
 
-  /@vue/devtools-api/6.0.0-beta.20.1:
-    resolution: {integrity: sha512-R2rfiRY+kZugzWh9ZyITaovx+jpU4vgivAEAiz80kvh3yviiTU3CBuGuyWpSwGz9/C7TkSWVM/FtQRGlZ16n8Q==}
+  /@vue/devtools-api/6.0.12:
+    resolution: {integrity: sha512-iO/4FIezHKXhiDBdKySCvJVh8/mZPxHpiQrTy+PXVqJZgpTPTdHy4q8GXulaY+UKEagdkBb0onxNQZ0LNiqVhw==}
     dev: true
 
   /@vue/reactivity-transform/3.2.31:
@@ -3331,8 +3331,8 @@ packages:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
 
-  /lint-staged/12.3.4_enquirer@2.3.6:
-    resolution: {integrity: sha512-yv/iK4WwZ7/v0GtVkNb3R82pdL9M+ScpIbJLJNyCXkJ1FGaXvRCOg/SeL59SZtPpqZhE7BD6kPKFLIDUhDx2/w==}
+  /lint-staged/12.3.5_enquirer@2.3.6:
+    resolution: {integrity: sha512-oOH36RUs1It7b9U/C7Nl/a0sLfoIBcMB8ramiB3nuJ6brBqzsWiUAFSR5DQ3yyP/OR7XKMpijtgKl2DV1lQ3lA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
@@ -3549,7 +3549,7 @@ packages:
     hasBin: true
     dev: true
 
-  /mkdist/0.3.10_typescript@4.5.5:
+  /mkdist/0.3.10_typescript@4.6.2:
     resolution: {integrity: sha512-Aoc6hjILr2JPUJU2OUvBiD5sZ/CG1FeiXwk6KKPqE0iSTjBCrjrVK/fP5ig+TB3AKHvh2aA2QXXGeXVCJBdSwg==}
     hasBin: true
     peerDependencies:
@@ -3565,7 +3565,7 @@ packages:
       jiti: 1.12.15
       mri: 1.2.0
       pathe: 0.2.0
-      typescript: 4.5.5
+      typescript: 4.6.2
     dev: true
 
   /mlly/0.3.15:
@@ -4115,7 +4115,7 @@ packages:
       glob: 7.2.0
     dev: true
 
-  /rollup-plugin-dts/4.1.0_rollup@2.67.1+typescript@4.5.5:
+  /rollup-plugin-dts/4.1.0_rollup@2.67.1+typescript@4.6.2:
     resolution: {integrity: sha512-rriXIm3jdUiYeiAAd1Fv+x2AxK6Kq6IybB2Z/IdoAW95fb4uRUurYsEYKa8L1seedezDeJhy8cfo8FEL9aZzqg==}
     engines: {node: '>=v12.22.7'}
     peerDependencies:
@@ -4124,7 +4124,7 @@ packages:
     dependencies:
       magic-string: 0.25.7
       rollup: 2.67.1
-      typescript: 4.5.5
+      typescript: 4.6.2
     optionalDependencies:
       '@babel/code-frame': 7.16.0
     dev: true
@@ -4660,8 +4660,8 @@ packages:
       is-typedarray: 1.0.0
     dev: true
 
-  /typescript/4.5.5:
-    resolution: {integrity: sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==}
+  /typescript/4.6.2:
+    resolution: {integrity: sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
@@ -4692,7 +4692,7 @@ packages:
       jiti: 1.12.15
       magic-string: 0.25.7
       mkdirp: 1.0.4
-      mkdist: 0.3.10_typescript@4.5.5
+      mkdist: 0.3.10_typescript@4.6.2
       mlly: 0.4.1
       mri: 1.2.0
       pathe: 0.2.0
@@ -4700,10 +4700,10 @@ packages:
       pretty-bytes: 5.6.0
       rimraf: 3.0.2
       rollup: 2.67.1
-      rollup-plugin-dts: 4.1.0_rollup@2.67.1+typescript@4.5.5
+      rollup-plugin-dts: 4.1.0_rollup@2.67.1+typescript@4.6.2
       rollup-plugin-esbuild: 4.8.2_esbuild@0.14.19+rollup@2.67.1
       scule: 0.2.1
-      typescript: 4.5.5
+      typescript: 4.6.2
       untyped: 0.3.0
     transitivePeerDependencies:
       - supports-color
@@ -4749,12 +4749,12 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vue-router/4.0.12_vue@3.2.31:
-    resolution: {integrity: sha512-CPXvfqe+mZLB1kBWssssTiWg4EQERyqJZes7USiqfW9B5N2x+nHlnsM1D3b5CaJ6qgCvMmYJnz+G0iWjNCvXrg==}
+  /vue-router/4.0.13_vue@3.2.31:
+    resolution: {integrity: sha512-LmXrC+BkDRLak+d5xTMgUYraT3Nj0H/vCbP+7usGvIl9Viqd1UP6AsP0i69pSbn9O0dXK/xCdp4yPw21HqV9Jw==}
     peerDependencies:
-      vue: ^3.0.0
+      vue: ^3.2.0
     dependencies:
-      '@vue/devtools-api': 6.0.0-beta.20.1
+      '@vue/devtools-api': 6.0.12
       vue: 3.2.31
     dev: true
 
