@@ -16,7 +16,6 @@ npm install vue-router-mock
 
 This library
 
-- jest
 - vue test utils next
 - vue 3 and vue router 4
 
