@@ -233,6 +233,22 @@ You need to manually specify the component that is supposed to be displayed beca
 
 NOTE: this might change to become automatic if the necessary `routes` are provided.
 
+## Testing libraries
+
+Vue Router Mock automatically detects if you are using [Sinon.js](https://sinonjs.org/), [Jest](https://jestjs.io/), or [Vitest](https://vitest.dev/) and use their _spying methods_. You can of course configure Vue Router Mock to use any spying library you want.
+
+For example, if you use [Vitest with `globals: false`](https://vitest.dev/config/#globals),
+then you need to manually configure the `spy` option and pass `vi.fn()` to it:
+
+```ts
+const router = createRouterMock({
+  spy: {
+    create: fn => vi.fn(fn),
+    reset: spy => spy.mockReset(),
+  },
+})
+```
+
 ## Caveats
 
 ### Nested Routes
@@ -264,8 +280,10 @@ Remember, this is not necessary if you are not adding routes or if they are not 
 ## Related
 
 - [Jest](https://jestjs.io/)
-- [Vue Test Utils](https://github.com/vuejs/vue-test-utils-next)
-- [Vue Router](https://github.com/vuejs/vue-router-next)
+- [Vitest](https://vitest.dev/)
+- [Sinon.js](https://sinonjs.org/)
+- [Vue Test Utils](https://github.com/vuejs/test-utils)
+- [Vue Router](https://github.com/vuejs/router)
 - [Vuex Mock Store](https://github.com/posva/vuex-mock-store) - A Vuex 3.x mock
 
 ## License
