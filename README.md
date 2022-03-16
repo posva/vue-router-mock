@@ -235,21 +235,18 @@ NOTE: this might change to become automatic if the necessary `routes` are provid
 
 ## Testing libraries
 
-By default, `vue-router-mock` will use [Sinon.js](https://sinonjs.org/), [Jest](https://jestjs.io/), or [Vitest](https://vitest.dev/) support to create and reset spies.
+Vue Router Mock automatically detects if you are using [Sinon.js](https://sinonjs.org/), [Jest](https://jestjs.io/), or [Vitest](https://vitest.dev/) and use their _spying methods_. You can of course configure Vue Router Mock to use any spying library you want.
 
-You can also configure `vue-router-mock` to use any other testing library. 
-
-For example, if you use Vitest with `globals: false` 
-(see the documentation [here](https://vitest.dev/config/#globals)),
-then you need to configure `vue-router-mock` to use `vi.fn()` as the spying function with the `spy` option:
+For example, if you use [Vitest with `globals: false`](https://vitest.dev/config/#globals),
+then you need to manually configure the `spy` option and pass `vi.fn()` to it:
 
 ```ts
 const router = createRouterMock({
   spy: {
     create: fn => vi.fn(fn),
-    reset: spy => spy.mockReset()
-  }
-});
+    reset: spy => spy.mockReset(),
+  },
+})
 ```
 
 ## Caveats
