@@ -12,13 +12,13 @@ specifiers:
   execa: ^6.1.0
   jest: ^27.5.1
   lint-staged: ^12.3.7
-  minimist: ^1.2.5
-  prettier: ^2.6.0
+  minimist: ^1.2.6
+  prettier: ^2.6.1
   publie: ^0.0.2
   semver: ^7.3.5
   sinon: ^13.0.1
-  typescript: ^4.6.2
-  unbuild: ^0.7.0
+  typescript: ^4.6.3
+  unbuild: ^0.7.2
   vue: ^3.2.31
   vue-router: ^4.0.14
   yorkie: ^2.0.0
@@ -35,13 +35,13 @@ devDependencies:
   execa: 6.1.0
   jest: 27.5.1
   lint-staged: 12.3.7_enquirer@2.3.6
-  minimist: 1.2.5
-  prettier: 2.6.0
-  publie: 0.0.2_prettier@2.6.0
+  minimist: 1.2.6
+  prettier: 2.6.1
+  publie: 0.0.2_prettier@2.6.1
   semver: 7.3.5
   sinon: 13.0.1
-  typescript: 4.6.2
-  unbuild: 0.7.0
+  typescript: 4.6.3
+  unbuild: 0.7.2
   vue: 3.2.31
   vue-router: 4.0.14_vue@3.2.31
   yorkie: 2.0.0
@@ -2452,7 +2452,7 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
     dependencies:
-      minimist: 1.2.5
+      minimist: 1.2.6
       neo-async: 2.6.2
       source-map: 0.6.1
       wordwrap: 1.0.0
@@ -3295,7 +3295,7 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
     dependencies:
-      minimist: 1.2.5
+      minimist: 1.2.6
     dev: true
 
   /jsonc-parser/3.0.0:
@@ -3567,8 +3567,8 @@ packages:
       kind-of: 6.0.3
     dev: true
 
-  /minimist/1.2.5:
-    resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
+  /minimist/1.2.6:
+    resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
     dev: true
 
   /mkdirp/1.0.4:
@@ -3577,7 +3577,7 @@ packages:
     hasBin: true
     dev: true
 
-  /mkdist/0.3.10_typescript@4.6.2:
+  /mkdist/0.3.10_typescript@4.6.3:
     resolution: {integrity: sha512-Aoc6hjILr2JPUJU2OUvBiD5sZ/CG1FeiXwk6KKPqE0iSTjBCrjrVK/fP5ig+TB3AKHvh2aA2QXXGeXVCJBdSwg==}
     hasBin: true
     peerDependencies:
@@ -3593,7 +3593,7 @@ packages:
       jiti: 1.13.0
       mri: 1.2.0
       pathe: 0.2.0
-      typescript: 4.6.2
+      typescript: 4.6.3
     dev: true
 
   /mlly/0.3.15:
@@ -3952,8 +3952,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier/2.6.0:
-    resolution: {integrity: sha512-m2FgJibYrBGGgQXNzfd0PuDGShJgRavjUoRCw1mZERIWVSXF0iLzLm+aOqTAbLnC3n6JzUhAA8uZnFVghHJ86A==}
+  /prettier/2.6.1:
+    resolution: {integrity: sha512-8UVbTBYGwN37Bs9LERmxCPjdvPxlEowx2urIL6urHzdb3SDq4B/Z6xLFCblrSnE4iKWcS6ziJ3aOYrc1kz/E2A==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -3992,7 +3992,7 @@ packages:
     resolution: {integrity: sha512-RIdOzyoavK+hA18OGGWDqUTsCLhtA7IcZ/6NCs4fFJaHBDab+pDDmDIByWFRQJq2Cd7r1OoQxBGKOaztq+hjIQ==}
     dev: true
 
-  /publie/0.0.2_prettier@2.6.0:
+  /publie/0.0.2_prettier@2.6.1:
     resolution: {integrity: sha512-4+UoKVfk8QCrMOjWSzeojYsIgiDuGGqiwjIwZaoDbF3aAzBgW9RVgzSJXmGZu8a7tZp5iOaCdcvuimTcfG5cxg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
@@ -4003,8 +4003,8 @@ packages:
       conventional-changelog-cli: 2.2.2
       enquirer: 2.3.6
       execa: 6.1.0
-      minimist: 1.2.5
-      prettier: 2.6.0
+      minimist: 1.2.6
+      prettier: 2.6.1
       semver: 7.3.5
     dev: true
 
@@ -4149,7 +4149,7 @@ packages:
       glob: 7.2.0
     dev: true
 
-  /rollup-plugin-dts/4.2.0_rollup@2.70.0+typescript@4.6.2:
+  /rollup-plugin-dts/4.2.0_rollup@2.70.0+typescript@4.6.3:
     resolution: {integrity: sha512-lx6irWVhz/x4//tIqRhzk4FOqGQ0n37ZM2wpPCn4uafl/EmiV92om7ZdAsq7Bzho6C+Xh5GfsyuP9H+Udv72Lg==}
     engines: {node: '>=v12.22.10'}
     peerDependencies:
@@ -4158,7 +4158,7 @@ packages:
     dependencies:
       magic-string: 0.26.1
       rollup: 2.70.0
-      typescript: 4.6.2
+      typescript: 4.6.3
     optionalDependencies:
       '@babel/code-frame': 7.16.7
     dev: true
@@ -4694,8 +4694,8 @@ packages:
       is-typedarray: 1.0.0
     dev: true
 
-  /typescript/4.6.2:
-    resolution: {integrity: sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==}
+  /typescript/4.6.3:
+    resolution: {integrity: sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
@@ -4708,8 +4708,8 @@ packages:
     dev: true
     optional: true
 
-  /unbuild/0.7.0:
-    resolution: {integrity: sha512-El+MmPXR8qSx0gWsUCB22Cfqjq8rQH3xx6MlpJN7vPA4CNpwN++XcFuLWHGM8RWtiBYRuTjw3KuOw34nV6hLxw==}
+  /unbuild/0.7.2:
+    resolution: {integrity: sha512-79Kc8aYyCJiVIJPTRIiQSV99y3m34Kd0E7Y7z9YxvdjERDUBX32J62WmRzuhNfUJffEO4+pRosYSaR0X5wOmyQ==}
     hasBin: true
     dependencies:
       '@rollup/plugin-alias': 3.1.9_rollup@2.70.0
@@ -4726,7 +4726,7 @@ packages:
       jiti: 1.13.0
       magic-string: 0.26.1
       mkdirp: 1.0.4
-      mkdist: 0.3.10_typescript@4.6.2
+      mkdist: 0.3.10_typescript@4.6.3
       mlly: 0.4.3
       mri: 1.2.0
       pathe: 0.2.0
@@ -4734,10 +4734,10 @@ packages:
       pretty-bytes: 6.0.0
       rimraf: 3.0.2
       rollup: 2.70.0
-      rollup-plugin-dts: 4.2.0_rollup@2.70.0+typescript@4.6.2
+      rollup-plugin-dts: 4.2.0_rollup@2.70.0+typescript@4.6.3
       rollup-plugin-esbuild: 4.8.2_esbuild@0.14.25+rollup@2.70.0
       scule: 0.2.1
-      typescript: 4.6.2
+      typescript: 4.6.3
       untyped: 0.4.2
     transitivePeerDependencies:
       - supports-color
