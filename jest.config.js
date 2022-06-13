@@ -16,5 +16,4 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': '@sucrase/jest-plugin',
   },
-  testURL: 'http://localhost/',
 }
