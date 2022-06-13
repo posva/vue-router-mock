@@ -1,8 +1,7 @@
 import { RouterMock } from './router'
-import { ComponentPublicInstance } from 'vue'
 
 declare module '@vue/test-utils' {
-  interface VueWrapper<T extends ComponentPublicInstance> {
+  interface VueWrapper<T> {
     router: RouterMock
   }
 }
