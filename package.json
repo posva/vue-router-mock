@@ -54,7 +54,7 @@
     "enquirer": "^2.3.6",
     "execa": "^6.1.0",
     "jest": "^27.5.1",
-    "lint-staged": "^13.0.2",
+    "lint-staged": "^13.0.3",
     "minimist": "^1.2.6",
     "prettier": "^2.7.1",
     "publie": "^0.0.2",

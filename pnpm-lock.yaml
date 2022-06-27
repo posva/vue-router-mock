@@ -11,7 +11,7 @@ specifiers:
   enquirer: ^2.3.6
   execa: ^6.1.0
   jest: ^27.5.1
-  lint-staged: ^13.0.2
+  lint-staged: ^13.0.3
   minimist: ^1.2.6
   prettier: ^2.7.1
   publie: ^0.0.2
@@ -34,7 +34,7 @@ devDependencies:
   enquirer: 2.3.6
   execa: 6.1.0
   jest: 27.5.1
-  lint-staged: 13.0.2_enquirer@2.3.6
+  lint-staged: 13.0.3_enquirer@2.3.6
   minimist: 1.2.6
   prettier: 2.7.1
   publie: 0.0.2_prettier@2.7.1
@@ -3623,8 +3623,8 @@ packages:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
 
-  /lint-staged/13.0.2_enquirer@2.3.6:
-    resolution: {integrity: sha512-qQLfLTh9z34eMzfEHENC+QBskZfxjomrf+snF3xJ4BzilORbD989NLqQ00ughsF/A+PT41e87+WsMFabf9++pQ==}
+  /lint-staged/13.0.3_enquirer@2.3.6:
+    resolution: {integrity: sha512-9hmrwSCFroTSYLjflGI8Uk+GWAwMB4OlpU4bMJEAT5d/llQwtYKoim4bLOyLCuWFAhWEupE0vkIFqtw/WIsPug==}
     engines: {node: ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
