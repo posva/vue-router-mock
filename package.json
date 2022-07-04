@@ -47,7 +47,7 @@
     "@sucrase/jest-plugin": "^2.2.1",
     "@types/jest": "^27.5.2",
     "@types/jsdom": "^16.2.14",
-    "@types/sinon": "^10.0.11",
+    "@types/sinon": "^10.0.12",
     "@vue/test-utils": "^2.0.0",
     "chalk": "^5.0.1",
     "conventional-changelog-cli": "^2.2.2",

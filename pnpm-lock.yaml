@@ -4,7 +4,7 @@ specifiers:
   '@sucrase/jest-plugin': ^2.2.1
   '@types/jest': ^27.5.2
   '@types/jsdom': ^16.2.14
-  '@types/sinon': ^10.0.11
+  '@types/sinon': ^10.0.12
   '@vue/test-utils': ^2.0.0
   chalk: ^5.0.1
   conventional-changelog-cli: ^2.2.2
@@ -27,7 +27,7 @@ devDependencies:
   '@sucrase/jest-plugin': 2.2.1
   '@types/jest': 27.5.2
   '@types/jsdom': 16.2.14
-  '@types/sinon': 10.0.11
+  '@types/sinon': 10.0.12
   '@vue/test-utils': 2.0.0_vue@3.2.37
   chalk: 5.0.1
   conventional-changelog-cli: 2.2.2
@@ -1066,8 +1066,8 @@ packages:
       '@types/node': 17.0.42
     dev: true
 
-  /@types/sinon/10.0.11:
-    resolution: {integrity: sha512-dmZsHlBsKUtBpHriNjlK0ndlvEh8dcb9uV9Afsbt89QIyydpC7NcR+nWlAhASfy3GHnxTl4FX/aKE7XZUt/B4g==}
+  /@types/sinon/10.0.12:
+    resolution: {integrity: sha512-uWf4QJ4oky/GckJ1MYQxU52cgVDcXwBhDkpvLbi4EKoLPqLE4MOH6T/ttM33l3hi0oZ882G6oIzWv/oupRYSxQ==}
     dependencies:
       '@types/sinonjs__fake-timers': 8.1.1
     dev: true
