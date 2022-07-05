@@ -48,7 +48,7 @@
     "@types/jest": "^27.5.2",
     "@types/jsdom": "^16.2.14",
     "@types/sinon": "^10.0.12",
-    "@vue/test-utils": "^2.0.0",
+    "@vue/test-utils": "^2.0.2",
     "chalk": "^5.0.1",
     "conventional-changelog-cli": "^2.2.2",
     "enquirer": "^2.3.6",
