@@ -257,7 +257,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
       if (record && !runInComponentGuards) {
         record.leaveGuards.clear()
         record.updateGuards.clear()
-        Object.values(record.components).forEach((component) => {
+        Object.values(record.components || {}).forEach((component) => {
           // TODO: handle promises?
           // @ts-ignore
           delete component.beforeRouteUpdate

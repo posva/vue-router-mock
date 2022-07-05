@@ -1,4 +1,6 @@
 import { mount } from '@vue/test-utils'
+import { getRouter } from '../src'
+import { useRouter } from 'vue-router'
 
 describe('components', () => {
   it('stubs router link', async () => {
@@ -23,5 +25,24 @@ describe('components', () => {
     expect(wrapper.html()).toMatchInlineSnapshot(
       `"<a href=\\"/about\\" class=\\"\\">About</a>"`
     )
+  })
+
+  it('mounts component', async () => {
+    const wrapper = mount({
+      template: `<button @click="navigate()">Home</button>`,
+      setup() {
+        const router = useRouter()
+        function navigate() {
+          router.push('/')
+        }
+
+        return { navigate }
+      },
+    })
+
+    await wrapper.get('button').trigger('click')
+
+    const router = getRouter()
+    expect(router.push).toHaveBeenCalledWith('/')
   })
 })
