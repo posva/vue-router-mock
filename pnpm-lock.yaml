@@ -20,7 +20,7 @@ specifiers:
   typescript: ^4.7.4
   unbuild: ^0.7.4
   vue: ^3.2.37
-  vue-router: ^4.1.1
+  vue-router: ^4.1.2
   yorkie: ^2.0.0
 
 devDependencies:
@@ -43,7 +43,7 @@ devDependencies:
   typescript: 4.7.4
   unbuild: 0.7.4
   vue: 3.2.37
-  vue-router: 4.1.1_vue@3.2.37
+  vue-router: 4.1.2_vue@3.2.37
   yorkie: 2.0.0
 
 packages:
@@ -5097,8 +5097,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vue-router/4.1.1_vue@3.2.37:
-    resolution: {integrity: sha512-Wp1mEf2xCwT0ez7o9JvgpfBp9JGnVb+dPERzXDbugTatzJAJ60VWOhJKifQty85k+jOreoFHER4r5fu062PhPw==}
+  /vue-router/4.1.2_vue@3.2.37:
+    resolution: {integrity: sha512-5BP1qXFncVRwgV/XnqzsKApdMjQPqWIpoUBdL1ynz8HyLxIX/UDAx7Ql2BjmA5CXT/p61JfZvkpiFWFpaqcfag==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
