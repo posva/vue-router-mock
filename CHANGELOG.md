@@ -1,3 +1,9 @@
+## [0.1.9](https://github.com/posva/vue-router-mock/compare/v0.1.8...v0.1.9) (2022-08-19)
+
+### Features
+
+- better no spy message ([d8822e3](https://github.com/posva/vue-router-mock/commit/d8822e36adeb6b36e091b28a19a9b7e00d815cc4))
+
 ## [0.1.8](https://github.com/posva/vue-router-mock/compare/v0.1.7...v0.1.8) (2022-07-05)
 
 - Update versions
