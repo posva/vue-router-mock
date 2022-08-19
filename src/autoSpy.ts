@@ -32,7 +32,9 @@ export function createSpy<Fn extends (...args: any[]) => any>(
   console.error(
     `Couldn't detect a global spy (tried jest and sinon). Make sure to provide a "spy.create" option when creating the router mock.`
   )
-  throw new Error('No Spy Available')
+  throw new Error(
+    'No Spy Available. See https://github.com/posva/vue-router-mock#testing-libraries'
+  )
 }
 
 /**
