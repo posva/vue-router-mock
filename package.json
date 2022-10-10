@@ -44,7 +44,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@sucrase/jest-plugin": "^2.2.1",
+    "@sucrase/jest-plugin": "^3.0.0",
     "@types/jest": "^27.5.2",
     "@types/jsdom": "^16.2.15",
     "@types/sinon": "^10.0.13",
