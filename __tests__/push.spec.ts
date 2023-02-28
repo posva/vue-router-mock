@@ -1,10 +1,10 @@
 import { getRouter } from '../src'
-import { describe, it, expect, SpyInstance } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { createRouterMock } from './setup'
 
 declare module '../src' {
   interface RouterMockSpy<Fn> {
-    spy: Fn & SpyInstance<ReturnType<Fn>, Parameters<Fn>>
+    // spy: Fn & SpyInstance<ReturnType<Fn>, Parameters<Fn>>
   }
 }
 
