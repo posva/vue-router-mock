@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { getRouter } from '../src'
 import { useRouter } from 'vue-router'
+import { describe, it, expect } from 'vitest'
 
 describe('components', () => {
   it('stubs router link', async () => {

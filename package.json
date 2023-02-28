@@ -23,8 +23,8 @@
     "lint": "prettier -c --parser typescript \"{src,__tests__,e2e}/**/*.[jt]s?(x)\"",
     "lint:fix": "npm run lint --write",
     "test:types": "tsc --build tsconfig.json",
-    "test:unit": "jest --coverage",
-    "test": "npm run test:types && npm run test:unit && npm run build && npm run build:dts"
+    "test:unit": "vitest",
+    "test": "npm run test:types && npm run test:unit run --coverage && npm run build && npm run build:dts"
   },
   "files": [
     "dist/*.cjs",
@@ -54,6 +54,7 @@
     "conventional-changelog-cli": "^2.2.2",
     "enquirer": "^2.3.6",
     "execa": "^7.0.0",
+    "happy-dom": "^8.9.0",
     "jest": "^27.5.1",
     "lint-staged": "^13.1.2",
     "minimist": "^1.2.8",
@@ -63,6 +64,7 @@
     "sinon": "^14.0.0",
     "typescript": "^4.9.5",
     "unbuild": "^1.1.2",
+    "vitest": "^0.29.1",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
     "yorkie": "^2.0.0"

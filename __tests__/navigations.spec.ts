@@ -1,12 +1,9 @@
 import { mount } from '@vue/test-utils'
 import { NavigationFailureType } from 'vue-router'
-import {
-  injectRouterMock,
-  createRouterMock,
-  EmptyView,
-  getRouter,
-} from '../src'
+import { injectRouterMock, EmptyView, getRouter } from '../src'
 import Test from './fixtures/Test'
+import { describe, it, expect, vi } from 'vitest'
+import { createRouterMock } from './setup'
 
 describe('Navigations', () => {
   it('can check calls on push', async () => {
@@ -57,7 +54,7 @@ describe('Navigations', () => {
 
   describe('global guards', () => {
     it('runs beforeEach', async () => {
-      const guard = jest.fn()
+      const guard = vi.fn()
       const router = createRouterMock({ useRealNavigation: true })
       injectRouterMock(router)
       router.beforeEach(guard)
@@ -69,7 +66,7 @@ describe('Navigations', () => {
 
   describe('per-router guards', () => {
     it('ignored by default', async () => {
-      const beforeEnter = jest.fn()
+      const beforeEnter = vi.fn()
       const router = createRouterMock()
       injectRouterMock(router)
       router.addRoute({ path: '/foo', beforeEnter, component: EmptyView })
@@ -80,7 +77,7 @@ describe('Navigations', () => {
     })
 
     it('ignore them with other setNextGuardReturn', async () => {
-      const beforeEnter = jest.fn()
+      const beforeEnter = vi.fn()
       const router = createRouterMock()
       injectRouterMock(router)
       router.addRoute({ path: '/foo', beforeEnter, component: EmptyView })
@@ -96,11 +93,11 @@ describe('Navigations', () => {
     async function factory(
       options: Parameters<typeof createRouterMock>[0] = {}
     ) {
-      const leaveGuard = jest.fn()
-      const updateGuard = jest.fn()
-      const beforeRouteEnter = jest.fn()
-      const beforeRouteUpdate = jest.fn()
-      const beforeRouteLeave = jest.fn()
+      const leaveGuard = vi.fn()
+      const updateGuard = vi.fn()
+      const beforeRouteEnter = vi.fn()
+      const beforeRouteUpdate = vi.fn()
+      const beforeRouteLeave = vi.fn()
 
       const RouteComponent = {
         ...Test,

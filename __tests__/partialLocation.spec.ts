@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { watch } from 'vue'
 import { getRouter } from '../src'
+import { describe, it, expect, vi } from 'vitest'
 
 describe('partial location', () => {
   describe('setParams', () => {
@@ -10,7 +11,7 @@ describe('partial location', () => {
       const wrapper = mount({
         template: `<p>{{ $route.params.userId }}</p>`,
       })
-      const spy = jest.fn()
+      const spy = vi.fn()
 
       watch(() => wrapper.vm.$route.params, spy)
 
@@ -35,7 +36,7 @@ describe('partial location', () => {
       const wrapper = mount({
         template: `<p>{{ $route.query.page }}</p>`,
       })
-      const spy = jest.fn()
+      const spy = vi.fn()
 
       watch(() => wrapper.vm.$route.query, spy)
 
@@ -60,7 +61,7 @@ describe('partial location', () => {
       const wrapper = mount({
         template: `<p>{{ $route.hash }}</p>`,
       })
-      const spy = jest.fn()
+      const spy = vi.fn()
 
       watch(() => wrapper.vm.$route.hash, spy)
 

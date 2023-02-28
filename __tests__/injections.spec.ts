@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { useRoute, useRouter } from 'vue-router'
 import { getRouter } from '../src'
+import { describe, it, expect } from 'vitest'
 
 describe('Injections', () => {
   it('injects the router instance', async () => {
