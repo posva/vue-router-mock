@@ -1,6 +1,6 @@
 {
   "name": "vue-router-mock",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "Easily test your components by mocking the router",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",

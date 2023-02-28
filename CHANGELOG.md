@@ -1,3 +1,9 @@
+# [0.2.0](https://github.com/posva/vue-router-mock/compare/v0.1.9...v0.2.0) (2023-02-28)
+
+### Bug Fixes
+
+- **types:** add types export to export mapping in package.json ([#183](https://github.com/posva/vue-router-mock/issues/183)) ([d658bf2](https://github.com/posva/vue-router-mock/commit/d658bf2c795e3d3b83b1b9140296385e2702b6fa))
+
 ## [0.1.9](https://github.com/posva/vue-router-mock/compare/v0.1.8...v0.1.9) (2022-08-19)
 
 ### Features
