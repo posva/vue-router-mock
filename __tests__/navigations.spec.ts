@@ -113,7 +113,7 @@ describe('Navigations', () => {
       router.addRoute({ path: '/test', component: RouteComponent })
       await router.push('/test')
 
-      const wrapper = mount(RouteComponent, {
+      const wrapper = mount(RouteComponent as any, {
         props: { leaveGuard, updateGuard },
       })
 
