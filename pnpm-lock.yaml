@@ -14,7 +14,7 @@ specifiers:
   prettier: ^2.8.8
   publie: ^0.0.2
   semver: ^7.5.0
-  typescript: ^4.9.5
+  typescript: ^5.0.4
   unbuild: ^1.2.1
   vitest: ^0.31.0
   vue: ^3.2.47
@@ -35,7 +35,7 @@ devDependencies:
   prettier: 2.8.8
   publie: 0.0.2_prettier@2.8.8
   semver: 7.5.0
-  typescript: 4.9.5
+  typescript: 5.0.4
   unbuild: 1.2.1
   vitest: 0.31.0_happy-dom@8.9.0
   vue: 3.2.47
@@ -63,6 +63,7 @@ packages:
   /@babel/code-frame/7.21.4:
     resolution: {integrity: sha512-LYvhNKfwWSPpocw8GI7gpK2nq3HSDuEPC/uSYaALSJu9xjsalaaYFOq0Pwt5KmVqwEbZlDu81aLXwBOmD/Fv9g==}
     engines: {node: '>=6.9.0'}
+    requiresBuild: true
     dependencies:
       '@babel/highlight': 7.18.6
     dev: true
@@ -3073,7 +3074,7 @@ packages:
       rollup: 3.21.4
       typescript: 5.0.4
     optionalDependencies:
-      '@babel/code-frame': 7.18.6
+      '@babel/code-frame': 7.21.4
     dev: true
 
   /rollup/3.21.4:
@@ -3469,12 +3470,6 @@ packages:
   /type-fest/0.8.1:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
     engines: {node: '>=8'}
-    dev: true
-
-  /typescript/4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
     dev: true
 
   /typescript/5.0.4:
