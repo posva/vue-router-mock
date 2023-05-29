@@ -60,9 +60,9 @@
     "semver": "^7.5.1",
     "typescript": "^5.0.4",
     "unbuild": "^1.2.1",
-    "vitest": "^0.31.0",
-    "vue": "^3.3.2",
-    "vue-router": "^4.2.0",
+    "vitest": "^0.31.1",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.1",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
