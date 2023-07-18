@@ -3,6 +3,7 @@ import { injectRouterMock } from '../src'
 import Test from './fixtures/Test'
 import { describe, it, expect, beforeEach } from 'vitest'
 import { createRouterMock } from './setup'
+import { useRoute } from 'vue-router'
 
 describe('Route location', () => {
   it('creates router properties', async () => {
@@ -15,14 +16,38 @@ describe('Route location', () => {
   it('can change the current location when pushing', async () => {
     const wrapper = mount(Test)
 
-    wrapper.vm.$router.push('/hi?q=query#hash')
-    wrapper.vm.$router
+    wrapper.router.push('/hi?q=query#hash')
 
     expect(wrapper.vm.$route).toMatchObject({
       path: '/hi',
       query: { q: 'query' },
       hash: '#hash',
     })
+  })
+
+  it('keeps $route reactive', async () => {
+    const wrapper = mount({
+      template: `<div>{{ $route.path }}</div>`,
+    })
+
+    expect(wrapper.text()).toBe('/')
+    await wrapper.router.push('/foo')
+    expect(wrapper.text()).toBe('/foo')
+  })
+
+  it('keeps useRoute() reactive', async () => {
+    const wrapper = mount({
+      setup() {
+        return {
+          route: useRoute(),
+        }
+      },
+      template: `<div>{{ route.path }}</div>`,
+    })
+
+    expect(wrapper.text()).toBe('/')
+    await wrapper.router.push('/foo')
+    expect(wrapper.text()).toBe('/foo')
   })
 
   describe('different initialLocation', () => {
