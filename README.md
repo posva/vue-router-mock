@@ -2,21 +2,21 @@
 
 > Easily mock routing interactions in your Vue 3 apps
 
-**⚠️ This library intends to be a collaboration of people writing tests to create a better experience writing tests that involve the use of routing with Vue.** Your feedback and experience is welcomed in issues and discussions to give the API shape and create a library that eases unit testing components that deal with the router.
-
 ## Installation
 
 ```sh
-yarn add vue-router-mock
+pnpm i -D vue-router-mock
 # or
-npm install vue-router-mock
+yarn add -D vue-router-mock
+# or
+npm install -D vue-router-mock
 ```
 
 ## Requirements
 
 This library
 
-- vue test utils next
+- `@vue/test-utils` >= 2.4.0
 - vue 3 and vue router 4
 
 ## Goal

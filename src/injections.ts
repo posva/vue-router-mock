@@ -6,14 +6,11 @@ import {
   RouterLink,
   RouterView,
   routerViewLocationKey,
-  // @ts-ignore: for api-extractor
-  RouteLocationMatched,
 } from 'vue-router'
 import { config } from '@vue/test-utils'
 import { createReactiveRouteLocation } from './routeLocation'
 import { createRouterMock, RouterMock } from './router'
-// @ts-ignore: for api-extractor
-import { computed, Ref, ComputedRef } from 'vue'
+import { computed, Plugin } from 'vue'
 
 /**
  * Inject global variables, overriding any previously inject router mock
@@ -37,17 +34,26 @@ export function injectRouterMock(router?: RouterMock) {
   config.global.components.RouterView = RouterView
   config.global.components.RouterLink = RouterLink
 
-  // TODO: remove if https://github.com/vuejs/vue-test-utils-next/issues/1023
-  // gets merged
-  if (Array.isArray(config.global.stubs)) {
-    config.global.stubs.push('RouterLink')
-    config.global.stubs.push('RouterView')
-  } else {
-    config.global.stubs.RouterLink = true
-    config.global.stubs.RouterView = true
-  }
+  config.global.stubs.RouterLink = true
+  config.global.stubs.RouterView = true
 
   return { router, route }
+}
+
+// TODO: explore this idea rather than having the weird inject function
+export function createPlugin(router: RouterMock): Plugin {
+  return (app) => {
+    const provides = createProvide(router)
+    const route = provides[
+      routeLocationKey as any
+    ] as RouteLocationNormalizedLoaded
+
+    for (const key in provides) {
+      app.provide(key, provides[key])
+    }
+    app.config.globalProperties.$router = router
+    app.config.globalProperties.$route = route
+  }
 }
 
 /**
