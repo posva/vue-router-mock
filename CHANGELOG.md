@@ -1,3 +1,9 @@
+# [1.0.0](https://github.com/posva/vue-router-mock/compare/v0.2.0...v1.0.0) (2023-07-18)
+
+### Bug Fixes
+
+- upgrade vue-test-utils types ([b8faf58](https://github.com/posva/vue-router-mock/commit/b8faf58a6f24cda6d1b38f64201230e707cd3826))
+
 # [0.2.0](https://github.com/posva/vue-router-mock/compare/v0.1.9...v0.2.0) (2023-02-28)
 
 ### Bug Fixes
