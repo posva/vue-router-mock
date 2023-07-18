@@ -25,19 +25,20 @@ The goal of Vue Router Mock is to enable users to **unit and integration test** 
 
 ## Introduction
 
-Vue Router Mock exposes a few functions to be used individually and they are all documented through TS. But most of the time you want to globally inject the router in a _setupFilesAfterEnv_ file. Create a `jest.setup.js` file at the root of your project (it can be named differently):
+Vue Router Mock exposes a few functions to be used individually and they are all documented through TS. But most of the time you want to globally inject the router in a _setupFilesAfterEnv_ file. Create a `tests/router-mock-setup.js` file at the root of your project (it can be named differently):
 
 ```js
-const {
+import {
   VueRouterMock,
   createRouterMock,
   injectRouterMock,
-} = require('vue-router-mock')
-const { config } = require('@vue/test-utils')
+} from 'vue-router-mock'
+import { config } from '@vue/test-utils'
 
 // create one router per test file
 const router = createRouterMock()
 beforeEach(() => {
+  router.reset() // reset the router state
   injectRouterMock(router)
 })
 
@@ -45,10 +46,25 @@ beforeEach(() => {
 config.plugins.VueWrapper.install(VueRouterMock)
 ```
 
+> Note: you might need to write this file in CommonJS for Jest. In Vite, you can write it in Typescript
+
 Then add this line to your `jest.config.js`:
 
 ```js
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/tests/router-mock-setup.js'],
+```
+
+or to your `vitest.config.ts`:
+
+```ts
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    environment: 'happy-dom', // <- or jsdom, needed to mount Vue Components
+    setupFiles: ['./tests/setup-router-mock.ts'],
+  },
+})
 ```
 
 This will inject a router in all your tests. If for specific tests, you need to inject a different version of the router, you can do so:
