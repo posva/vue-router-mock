@@ -2,10 +2,9 @@ import { config } from '@vue/test-utils'
 import type { VueWrapper } from '@vue/test-utils'
 import { routerKey } from 'vue-router'
 import type { RouterMock } from './router'
-import './globalExtensions'
 
 export function plugin(
-  wrapper: VueWrapper<any>
+  wrapper: VueWrapper
   // options: Pick<
   //   RouterOptions,
   //   | 'end'
@@ -40,4 +39,10 @@ export function plugin(
 
 export function getRouter() {
   return config.global.provide[routerKey as any] as RouterMock
+}
+
+declare module '@vue/test-utils' {
+  interface VueWrapper<VM, T> {
+    router: RouterMock
+  }
 }
