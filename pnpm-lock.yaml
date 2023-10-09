@@ -9,8 +9,8 @@ devDependencies:
     specifier: ^29.5.5
     version: 29.5.5
   '@types/sinon':
-    specifier: ^10.0.17
-    version: 10.0.17
+    specifier: ^10.0.19
+    version: 10.0.19
   '@vitest/coverage-v8':
     specifier: ^0.34.6
     version: 0.34.6(vitest@0.34.6)
@@ -30,8 +30,8 @@ devDependencies:
     specifier: ^7.2.0
     version: 7.2.0
   happy-dom:
-    specifier: ^12.5.0
-    version: 12.5.0
+    specifier: ^12.9.0
+    version: 12.9.0
   lint-staged:
     specifier: ^13.3.0
     version: 13.3.0(enquirer@2.4.1)
@@ -55,7 +55,7 @@ devDependencies:
     version: 1.2.1
   vitest:
     specifier: ^0.34.6
-    version: 0.34.6(happy-dom@12.5.0)
+    version: 0.34.6(happy-dom@12.9.0)
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -921,8 +921,8 @@ packages:
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
     dev: true
 
-  /@types/sinon@10.0.17:
-    resolution: {integrity: sha512-+6ILpcixQ0Ma3dHMTLv4rSycbDXkDljgKL+E0nI2RUxxhYTFyPSjt6RVMxh7jUshvyVcBvicb0Ktj+lAJcjgeA==}
+  /@types/sinon@10.0.19:
+    resolution: {integrity: sha512-MWZNGPSchIdDfb5FL+VFi4zHsHbNOTQEgjqFQk7HazXSXwUU9PAX3z9XBqb3AJGYr9YwrtCtaSMsT3brYsN/jQ==}
     dependencies:
       '@types/sinonjs__fake-timers': 8.1.2
     dev: true
@@ -961,7 +961,7 @@ packages:
       std-env: 3.3.3
       test-exclude: 6.0.0
       v8-to-istanbul: 9.1.0
-      vitest: 0.34.6(happy-dom@12.5.0)
+      vitest: 0.34.6(happy-dom@12.9.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2033,8 +2033,8 @@ packages:
       uglify-js: 3.17.4
     dev: true
 
-  /happy-dom@12.5.0:
-    resolution: {integrity: sha512-bEieZxuWNc6RrTQmOkaYSxqni2TkTItsId4SimAzW/Wo2cxuPP3qL6gWV/LsBH2s4DV5HZRLwciEtmhgwJJWNw==}
+  /happy-dom@12.9.0:
+    resolution: {integrity: sha512-Ap/bcno2k5316FYDqBJ2i0O1zS78W1jsNR4F/p2t3zdNoa+2H0k851RGef4STfIKdTwcQ/nk5Tx9d5BzQXfTrw==}
     dependencies:
       css.escape: 1.5.1
       entities: 4.5.0
@@ -3648,7 +3648,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest@0.34.6(happy-dom@12.5.0):
+  /vitest@0.34.6(happy-dom@12.9.0):
     resolution: {integrity: sha512-+5CALsOvbNKnS+ZHMXtuUC7nL8/7F1F2DnHGjSsszX8zCjWSSviphCb/NuS9Nzf4Q03KyyDRBAXhF/8lffME4Q==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -3692,7 +3692,7 @@ packages:
       cac: 6.7.14
       chai: 4.3.10
       debug: 4.3.4
-      happy-dom: 12.5.0
+      happy-dom: 12.9.0
       local-pkg: 0.4.3
       magic-string: 0.30.1
       pathe: 1.1.1
