@@ -45,8 +45,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^29.5.5",
-    "@types/sinon": "^10.0.19",
+    "@types/jest": "^29.5.6",
+    "@types/sinon": "^10.0.20",
     "@vitest/coverage-v8": "^0.34.6",
     "@vue/test-utils": "^2.4.1",
     "chalk": "^5.3.0",
@@ -62,7 +62,7 @@
     "typescript": "^5.2.2",
     "unbuild": "^1.2.1",
     "vitest": "^0.34.6",
-    "vue": "^3.3.4",
+    "vue": "^3.3.6",
     "vue-router": "^4.2.5",
     "yorkie": "^2.0.0"
   },
