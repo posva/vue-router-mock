@@ -27,8 +27,8 @@ devDependencies:
     specifier: ^2.4.1
     version: 2.4.1
   execa:
-    specifier: ^7.2.0
-    version: 7.2.0
+    specifier: ^8.0.1
+    version: 8.0.1
   happy-dom:
     specifier: ^12.10.3
     version: 12.10.3
