@@ -1,6 +1,6 @@
 {
   "name": "vue-router-mock",
-  "packageManager": "pnpm@8.10.5",
+  "packageManager": "pnpm@8.11.0",
   "version": "1.0.0",
   "description": "Easily test your components by mocking the router",
   "main": "dist/index.cjs",
@@ -45,7 +45,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^29.5.8",
+    "@types/jest": "^29.5.10",
     "@types/sinon": "^10.0.20",
     "@vitest/coverage-v8": "^0.34.6",
     "@vue/test-utils": "^2.4.2",
@@ -59,10 +59,10 @@
     "prettier": "^2.8.8",
     "publie": "^0.0.2",
     "semver": "^7.5.4",
-    "typescript": "^5.2.2",
+    "typescript": "^5.3.2",
     "unbuild": "^2.0.0",
     "vitest": "^0.34.6",
-    "vue": "^3.3.8",
+    "vue": "^3.3.9",
     "vue-router": "^4.2.5",
     "yorkie": "^2.0.0"
   },
