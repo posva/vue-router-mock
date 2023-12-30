@@ -14,6 +14,8 @@ describe('Navigations', () => {
     expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(1)
   })
 
+  it.todo('removes guards on reset()')
+
   it('can check calls on push even if the route is not declared', async () => {
     const wrapper = mount(Test)
 
@@ -62,6 +64,20 @@ describe('Navigations', () => {
       await router.push('/')
       expect(guard).toHaveBeenCalledTimes(1)
     })
+
+    it('runs afterEach', async () => {
+      const guard = vi.fn()
+      const router = createRouterMock({ useRealNavigation: true })
+      injectRouterMock(router)
+      router.afterEach(guard)
+      mount(Test)
+      await router.push('/')
+      expect(guard).toHaveBeenCalledTimes(1)
+    })
+
+    it.todo('beforeEachOnce')
+    it.todo('beforeResolveOnce')
+    it.todo('afterEachOnce')
   })
 
   describe('per-router guards', () => {
