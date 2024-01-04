@@ -25,7 +25,7 @@
     "test:types": "tsc --build tsconfig.json",
     "test:unit": "vitest",
     "test": "pnpm run test:types && pnpm run test:unit run --coverage && pnpm run build",
-    "postinstall": "simple-git-hooks"
+    "prepare": "simple-git-hooks"
   },
   "files": [
     "dist/*.cjs",
