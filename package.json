@@ -57,7 +57,7 @@
     "happy-dom": "^12.10.3",
     "lint-staged": "^15.2.0",
     "minimist": "^1.2.8",
-    "prettier": "^2.8.8",
+    "prettier": "^3.2.1",
     "publie": "^0.0.2",
     "semver": "^7.5.4",
     "simple-git-hooks": "^2.9.0",
