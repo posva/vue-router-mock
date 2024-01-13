@@ -24,7 +24,7 @@ describe('components', () => {
     )
 
     expect(wrapper.html()).toMatchInlineSnapshot(
-      `"<a href=\\"/about\\" class=\\"\\">About</a>"`
+      `"<a href="/about" class="">About</a>"`
     )
   })
 
