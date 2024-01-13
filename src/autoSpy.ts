@@ -68,7 +68,7 @@ export interface RouterMockSpyOptions {
  * ```
  */
 export interface RouterMockSpy<
-  Fn extends (...args: any[]) => any = (...args: any[]) => any
+  Fn extends (...args: any[]) => any = (...args: any[]) => any,
 > {
   // cannot be added or it wouldn't be extensible
   // spy: any
@@ -78,7 +78,7 @@ export interface RouterMockSpy<
  * @internal
  */
 export type _InferSpyType<
-  Fn extends (...args: any[]) => any = (...args: any[]) => any
+  Fn extends (...args: any[]) => any = (...args: any[]) => any,
   // @ts-ignore: the version with Record<'spy', any> doesn't work...
 > = keyof RouterMockSpy<Fn> extends 'spy' ? RouterMockSpy<Fn>['spy'] : Fn
 // > = RouterMockSpy<Fn> extends Record<'spy', any> ? RouterMockSpy<Fn>['spy'] : Fn
