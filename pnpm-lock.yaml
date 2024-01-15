@@ -30,8 +30,8 @@ devDependencies:
     specifier: ^8.0.1
     version: 8.0.1
   happy-dom:
-    specifier: ^13.0.6
-    version: 13.0.6
+    specifier: ^13.1.4
+    version: 13.1.4
   lint-staged:
     specifier: ^15.2.0
     version: 15.2.0
@@ -39,11 +39,11 @@ devDependencies:
     specifier: ^1.2.8
     version: 1.2.8
   prettier:
-    specifier: ^3.2.1
-    version: 3.2.1
+    specifier: ^3.2.2
+    version: 3.2.2
   publie:
     specifier: ^0.0.2
-    version: 0.0.2(prettier@3.2.1)
+    version: 0.0.2(prettier@3.2.2)
   semver:
     specifier: ^7.5.4
     version: 7.5.4
@@ -58,7 +58,7 @@ devDependencies:
     version: 2.0.0(typescript@5.3.3)
   vitest:
     specifier: ^1.2.0
-    version: 1.2.0(happy-dom@13.0.6)
+    version: 1.2.0(happy-dom@13.1.4)
   vue:
     specifier: ^3.4.13
     version: 3.4.13(typescript@5.3.3)
@@ -1323,7 +1323,7 @@ packages:
       std-env: 3.7.0
       test-exclude: 6.0.0
       v8-to-istanbul: 9.2.0
-      vitest: 1.2.0(happy-dom@13.0.6)
+      vitest: 1.2.0(happy-dom@13.1.4)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2577,8 +2577,8 @@ packages:
       uglify-js: 3.17.4
     dev: true
 
-  /happy-dom@13.0.6:
-    resolution: {integrity: sha512-Uyfnicb9UNd6W80C7Jf8ceAwekYkALzD3hbZmVGkH/UkdBmTd6CikpG6GSdgSl25gkRN/gZ8FMo/vdEUcUtLMQ==}
+  /happy-dom@13.1.4:
+    resolution: {integrity: sha512-f8STa4iuJcpXn7YjgqBEemzinyPAdjlHMxlCNbIERdRIjJO9Z9Cj3XW5LuiEhsURFfl0AOWqj0hQitme4gq+Gg==}
     dependencies:
       css.escape: 1.5.1
       entities: 4.5.0
@@ -3510,8 +3510,8 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /prettier@3.2.1:
-    resolution: {integrity: sha512-qSUWshj1IobVbKc226Gw2pync27t0Kf0EdufZa9j7uBSJay1CC+B3K5lAAZoqgX3ASiKuWsk6OmzKRetXNObWg==}
+  /prettier@3.2.2:
+    resolution: {integrity: sha512-HTByuKZzw7utPiDO523Tt2pLtEyK7OibUD9suEJQrPUCYQqrHr74GGX6VidMrovbf/I50mPqr8j/II6oBAuc5A==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -3547,7 +3547,7 @@ packages:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
     dev: true
 
-  /publie@0.0.2(prettier@3.2.1):
+  /publie@0.0.2(prettier@3.2.2):
     resolution: {integrity: sha512-4+UoKVfk8QCrMOjWSzeojYsIgiDuGGqiwjIwZaoDbF3aAzBgW9RVgzSJXmGZu8a7tZp5iOaCdcvuimTcfG5cxg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
@@ -3559,7 +3559,7 @@ packages:
       enquirer: 2.4.1
       execa: 6.1.0
       minimist: 1.2.8
-      prettier: 3.2.1
+      prettier: 3.2.2
       semver: 7.5.4
     dev: true
 
@@ -4290,7 +4290,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitest@1.2.0(happy-dom@13.0.6):
+  /vitest@1.2.0(happy-dom@13.1.4):
     resolution: {integrity: sha512-Ixs5m7BjqvLHXcibkzKRQUvD/XLw0E3rvqaCMlrm/0LMsA0309ZqYvTlPzkhh81VlEyVZXFlwWnkhb6/UMtcaQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -4325,7 +4325,7 @@ packages:
       chai: 4.4.1
       debug: 4.3.4
       execa: 8.0.1
-      happy-dom: 13.0.6
+      happy-dom: 13.1.4
       local-pkg: 0.5.0
       magic-string: 0.30.5
       pathe: 1.1.2
