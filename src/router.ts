@@ -134,7 +134,7 @@ export interface RouterMockOptions extends Partial<RouterOptions> {
    * const router = createRouterMock({
    *   spy: {
    *     create: fn => vi.fn(fn),
-   *     reset: spy => spy.mockReset()
+   *     reset: spy => spy.mockClear()
    *   }
    * });
    * ```

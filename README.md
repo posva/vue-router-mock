@@ -260,7 +260,7 @@ then you need to manually configure the `spy` option and pass `vi.fn()` to it:
 const router = createRouterMock({
   spy: {
     create: fn => vi.fn(fn),
-    reset: spy => spy.mockReset(),
+    reset: spy => spy.mockClear(),
   },
 })
 ```
