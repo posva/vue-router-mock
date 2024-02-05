@@ -32,6 +32,14 @@ describe('Navigations', () => {
     expect(wrapper.vm.$router.replace).toHaveBeenCalledTimes(1)
   })
 
+  it('can check calls on back', async () => {
+    const wrapper = mount(Test)
+
+    wrapper.vm.$router.back()
+    expect(wrapper.vm.$router.back).toHaveBeenCalled()
+    expect(wrapper.vm.$router.back).toHaveBeenCalledTimes(1)
+  })
+
   it('reset calls between tests', async () => {
     const wrapper = mount(Test)
     expect(wrapper.vm.$router.push).toHaveBeenCalledTimes(0)

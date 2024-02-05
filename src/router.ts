@@ -43,7 +43,9 @@ export interface RouterMock extends Router {
    * Returns a Promise of the pending navigation. Resolves right away if there
    * isn't any.
    */
-  getPendingNavigation(): ReturnType<Router['push']>
+  getPendingNavigation():
+    | ReturnType<Router['push']>
+    | ReturnType<Router['back']>
 
   /**
    * Sets the params of the current route without triggering a navigation. Can
@@ -79,6 +81,7 @@ export interface RouterMock extends Router {
   replace: _InferSpyType<Router['replace']>
   // FIXME: it doesn't seem to work for overloads
   // addRoute: _InferSpyType<Router['addRoute']>
+  back: _InferSpyType<Router['back']>
 }
 
 /**
@@ -172,7 +175,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   } = options
   const initialLocation = options.initialLocation || START_LOCATION
 
-  const { push, addRoute, replace, beforeEach, beforeResolve } = router
+  const { push, addRoute, replace, back, beforeEach, beforeResolve } = router
 
   const [addRouteMock, addRouteMockClear] = createSpy(
     (
@@ -201,9 +204,14 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     return consumeNextReturn(to, { replace: true })
   }, spy)
 
+  const [backMock, backMockClear] = createSpy((to: RouteLocationRaw) => {
+    return consumeNextReturn(to, { back: true })
+  }, spy)
+
   router.push = pushMock
   router.replace = replaceMock
   router.addRoute = addRouteMock
+  router.back = backMock
 
   let guardRemovers: Array<() => void> = []
   router.beforeEach = (...args) => {
@@ -221,6 +229,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     pushMockClear()
     replaceMockClear()
     addRouteMockClear()
+    backMockClear()
 
     guardRemovers.forEach((remove) => remove())
     guardRemovers = []
@@ -242,7 +251,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
 
   function consumeNextReturn(
     to: RouteLocationRaw,
-    options: { replace?: boolean } = {}
+    options: { replace?: boolean; back?: boolean } = {}
   ) {
     if (nextReturn != null || runInComponentGuards || useRealNavigation) {
       const removeGuard = router.beforeEach(() => {
@@ -265,13 +274,17 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
           delete component.beforeRouteLeave
         })
       }
-
-      pendingNavigation = (options.replace ? replace : push)(to)
-      pendingNavigation
-        .catch(() => {})
-        .finally(() => {
-          pendingNavigation = undefined
-        })
+      if (options.back) {
+        pendingNavigation = back()
+        pendingNavigation = undefined
+      } else {
+        pendingNavigation = (options.replace ? replace : push)(to)
+        pendingNavigation
+          .catch(() => {})
+          .finally(() => {
+            pendingNavigation = undefined
+          })
+      }
       return pendingNavigation
     }
 
@@ -289,7 +302,10 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     return Promise.resolve()
   }
 
-  let pendingNavigation: ReturnType<typeof push> | undefined
+  let pendingNavigation:
+    | ReturnType<typeof push>
+    | ReturnType<typeof back>
+    | undefined
   function getPendingNavigation() {
     return pendingNavigation || Promise.resolve()
   }
@@ -322,6 +338,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     push: pushMock,
     replace: replaceMock,
     addRoute: addRouteMock,
+    back: backMock,
     depth,
     setNextGuardReturn,
     getPendingNavigation,
