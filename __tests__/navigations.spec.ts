@@ -15,6 +15,7 @@ describe('Navigations', () => {
   })
 
   it.todo('removes guards on reset()')
+  it.todo('removes onError on reset()')
 
   it('can check calls on push even if the route is not declared', async () => {
     const wrapper = mount(Test)

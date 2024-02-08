@@ -172,7 +172,7 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   } = options
   const initialLocation = options.initialLocation || START_LOCATION
 
-  const { push, addRoute, replace, beforeEach, beforeResolve } = router
+  const { push, addRoute, replace, beforeEach, beforeResolve, onError } = router
 
   const [addRouteMock, addRouteMockClear] = createSpy(
     (
@@ -216,6 +216,12 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     guardRemovers.push(removeGuard)
     return removeGuard
   }
+  let onErrorRemovers: Array<() => void> = []
+  router.onError = (...args) => {
+    const removeOnError = onError(...args)
+    onErrorRemovers.push(removeOnError)
+    return removeOnError
+  }
 
   function reset() {
     pushMockClear()
@@ -224,6 +230,9 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
 
     guardRemovers.forEach((remove) => remove())
     guardRemovers = []
+
+    onErrorRemovers.forEach((remove) => remove())
+    onErrorRemovers = []
 
     nextReturn = undefined
     router.currentRoute.value =
