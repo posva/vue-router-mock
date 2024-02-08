@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/posva/vue-router-mock/compare/v1.0.0...v1.1.0) (2024-02-08)
+
+### Features
+
+- reset onError ([87c5689](https://github.com/posva/vue-router-mock/commit/87c56897d9ab1267162ca9446918d57dcb50b31a))
+- wip vue plugin version ([896ea16](https://github.com/posva/vue-router-mock/commit/896ea166e3324805079620c9ca40207a83b1cb2c))
+
 # [1.0.0](https://github.com/posva/vue-router-mock/compare/v0.2.0...v1.0.0) (2023-07-18)
 
 ### Bug Fixes
