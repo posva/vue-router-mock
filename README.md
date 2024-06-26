@@ -1,4 +1,4 @@
-# vue-router-mock [![test](https://github.com/posva/vue-router-mock/actions/workflows/test.yml/badge.svg)](https://github.com/posva/vue-router-mock/actions/workflows/test.yml) [![npm package](https://badgen.net/npm/v/vue-router-mock)](https://www.npmjs.com/package/vue-router-mock) [![coverage](https://badgen.net/codecov/c/github/posva/vue-router-mock)](https://codecov.io/github/posva/vue-router-mock) [![thanks](https://badgen.net/badge/thanks/♥/pink)](https://github.com/posva/thanks)
+# vue-router-mock [![test](https://github.com/posva/vue-router-mock/actions/workflows/test.yml/badge.svg)](https://github.com/posva/vue-router-mock/actions/workflows/test.yml) [![npm package](https://badgen.net/npm/v/vue-router-mock)](https://www.npmjs.com/package/vue-router-mock) [![codecov](https://codecov.io/gh/posva/vue-router-mock/graph/badge.svg?token=mEKj0wLUID)](https://codecov.io/gh/posva/vue-router-mock) [![thanks](https://badgen.net/badge/thanks/♥/pink)](https://github.com/posva/thanks)
 
 > Easily mock routing interactions in your Vue 3 apps
 
