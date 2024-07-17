@@ -65,7 +65,7 @@
     "unbuild": "^2.0.0",
     "vitest": "^2.0.3",
     "vue": "^3.4.32",
-    "vue-router": "^4.3.3"
+    "vue-router": "^4.4.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",

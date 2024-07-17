@@ -4,6 +4,7 @@ import {
   createMemoryHistory,
   createRouter,
   LocationQueryRaw,
+  RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   RouteParamsRaw,
   Router,
@@ -238,7 +239,8 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     router.currentRoute.value =
       initialLocation === START_LOCATION
         ? START_LOCATION
-        : router.resolve(initialLocation)
+        : // technically
+          (router.resolve(initialLocation) as RouteLocationNormalizedLoaded)
   }
 
   let nextReturn: Error | boolean | RouteLocationRaw | undefined = undefined
@@ -289,7 +291,9 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
     // all the routes in the mock router
     try {
       // NOTE: should we trigger a push to reset the internal pending navigation of the router?
-      router.currentRoute.value = router.resolve(to)
+      router.currentRoute.value = router.resolve(
+        to
+      ) as RouteLocationNormalizedLoaded
     } catch (error) {
       if (noUndeclaredRoutes) {
         throw error
@@ -307,17 +311,23 @@ export function createRouterMock(options: RouterMockOptions = {}): RouterMock {
   // behavior: each navigation replaces the whole `currentRoute` object
 
   function setParams(params: RouteParamsRaw) {
-    router.currentRoute.value = router.resolve({ params })
+    router.currentRoute.value = router.resolve({
+      params,
+    }) as RouteLocationNormalizedLoaded
     return nextTick()
   }
 
   function setQuery(query: LocationQueryRaw) {
-    router.currentRoute.value = router.resolve({ query })
+    router.currentRoute.value = router.resolve({
+      query,
+    }) as RouteLocationNormalizedLoaded
     return nextTick()
   }
 
   function setHash(hash: string) {
-    router.currentRoute.value = router.resolve({ hash })
+    router.currentRoute.value = router.resolve({
+      hash,
+    }) as RouteLocationNormalizedLoaded
     return nextTick()
   }
 
