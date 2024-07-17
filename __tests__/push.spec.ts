@@ -4,7 +4,7 @@ import { createRouterMock } from './setup'
 
 declare module '../src' {
   interface RouterMockSpy<Fn> {
-    // spy: Fn & SpyInstance<ReturnType<Fn>, Parameters<Fn>>
+    // spy: Fn & MockInstance<ReturnType<Fn>, Parameters<Fn>>
   }
 }
 
