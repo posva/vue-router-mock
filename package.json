@@ -64,7 +64,7 @@
     "typescript": "^5.5.3",
     "unbuild": "^2.0.0",
     "vitest": "^2.0.3",
-    "vue": "^3.4.32",
+    "vue": "^3.4.33",
     "vue-router": "^4.4.0"
   },
   "simple-git-hooks": {
