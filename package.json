@@ -48,7 +48,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/sinon": "^17.0.3",
-    "@vitest/coverage-v8": "^2.0.3",
+    "@vitest/coverage-v8": "^2.0.4",
     "@vue/test-utils": "^2.4.6",
     "chalk": "^5.3.0",
     "conventional-changelog-cli": "^5.0.0",
@@ -61,10 +61,10 @@
     "publie": "^0.0.2",
     "semver": "^7.6.3",
     "simple-git-hooks": "^2.11.1",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "unbuild": "^2.0.0",
-    "vitest": "^2.0.3",
-    "vue": "^3.4.33",
+    "vitest": "^2.0.4",
+    "vue": "^3.4.34",
     "vue-router": "^4.4.0"
   },
   "simple-git-hooks": {
