@@ -1,6 +1,6 @@
 {
   "name": "vue-router-mock",
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.7.0",
   "version": "1.1.0",
   "description": "Easily test your components by mocking the router",
   "main": "dist/index.cjs",
@@ -64,8 +64,8 @@
     "typescript": "^5.5.4",
     "unbuild": "^2.0.0",
     "vitest": "^2.0.5",
-    "vue": "^3.4.35",
-    "vue-router": "^4.4.2"
+    "vue": "^3.4.37",
+    "vue-router": "^4.4.3"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
