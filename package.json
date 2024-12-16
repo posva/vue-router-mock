@@ -62,7 +62,7 @@
     "semver": "^7.6.3",
     "simple-git-hooks": "^2.11.1",
     "typescript": "^5.5.4",
-    "unbuild": "^2.0.0",
+    "unbuild": "^3.0.1",
     "vitest": "^2.0.5",
     "vue": "^3.4.38",
     "vue-router": "^4.4.3"
