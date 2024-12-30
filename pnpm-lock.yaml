@@ -16,7 +16,7 @@ importers:
         version: 17.0.3
       '@vitest/coverage-v8':
         specifier: ^2.0.5
-        version: 2.0.5(vitest@2.0.5(@types/node@20.14.11)(happy-dom@15.7.3))
+        version: 2.0.5(vitest@2.0.5(@types/node@20.14.11)(happy-dom@16.0.1))
       '@vue/test-utils':
         specifier: ^2.4.6
         version: 2.4.6
@@ -33,8 +33,8 @@ importers:
         specifier: ^9.3.1
         version: 9.3.1
       happy-dom:
-        specifier: ^15.7.3
-        version: 15.7.3
+        specifier: ^16.0.1
+        version: 16.0.1
       lint-staged:
         specifier: ^15.2.10
         version: 15.2.10
@@ -61,7 +61,7 @@ importers:
         version: 3.0.1(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4))
       vitest:
         specifier: ^2.0.5
-        version: 2.0.5(@types/node@20.14.11)(happy-dom@15.7.3)
+        version: 2.0.5(@types/node@20.14.11)(happy-dom@16.0.1)
       vue:
         specifier: ^3.4.38
         version: 3.4.38(typescript@5.5.4)
@@ -1533,8 +1533,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@15.7.3:
-    resolution: {integrity: sha512-w3RUaYNXFJX5LiNVhOJLK4GqCB1bFj1FvELtpon3HrN8gUpS09V0Vvm4/BBRRj7mLUE1+ch8PKv1JxEp/0IHjA==}
+  happy-dom@16.0.1:
+    resolution: {integrity: sha512-cqbqvutE6XAIMe4nM93TkbW5SDFtLkU/6nsQfJBJ2KSlaT+My2kmnYsCFXrvEzvmP7s1xGJ6Xt4D9LNJIJHMbA==}
     engines: {node: '>=18.0.0'}
 
   hard-rejection@2.1.0:
@@ -3359,7 +3359,7 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.0
 
-  '@vitest/coverage-v8@2.0.5(vitest@2.0.5(@types/node@20.14.11)(happy-dom@15.7.3))':
+  '@vitest/coverage-v8@2.0.5(vitest@2.0.5(@types/node@20.14.11)(happy-dom@16.0.1))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
@@ -3373,7 +3373,7 @@ snapshots:
       std-env: 3.7.0
       test-exclude: 7.0.1
       tinyrainbow: 1.2.0
-      vitest: 2.0.5(@types/node@20.14.11)(happy-dom@15.7.3)
+      vitest: 2.0.5(@types/node@20.14.11)(happy-dom@16.0.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -4239,9 +4239,8 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.17.4
 
-  happy-dom@15.7.3:
+  happy-dom@16.0.1:
     dependencies:
-      entities: 4.5.0
       webidl-conversions: 7.0.0
       whatwg-mimetype: 3.0.0
 
@@ -5400,7 +5399,7 @@ snapshots:
       '@types/node': 20.14.11
       fsevents: 2.3.3
 
-  vitest@2.0.5(@types/node@20.14.11)(happy-dom@15.7.3):
+  vitest@2.0.5(@types/node@20.14.11)(happy-dom@16.0.1):
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@vitest/expect': 2.0.5
@@ -5423,7 +5422,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 20.14.11
-      happy-dom: 15.7.3
+      happy-dom: 16.0.1
     transitivePeerDependencies:
       - less
       - lightningcss
