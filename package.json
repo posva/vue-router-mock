@@ -1,6 +1,6 @@
 {
   "name": "vue-router-mock",
-  "packageManager": "pnpm@9.9.0",
+  "packageManager": "pnpm@10.6.5",
   "version": "1.1.0",
   "description": "Easily test your components by mocking the router",
   "main": "dist/index.cjs",
