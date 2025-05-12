@@ -55,7 +55,7 @@
     "enquirer": "^2.4.1",
     "execa": "^9.3.1",
     "happy-dom": "^17.4.4",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^16.0.0",
     "minimist": "^1.2.8",
     "prettier": "^3.3.3",
     "publie": "^0.0.2",
