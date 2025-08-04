@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/posva/vue-router-mock/compare/v1.1.0...v2.0.0) (2025-08-04)
+
+### Build System
+
+- use tsdown ([abafc07](https://github.com/posva/vue-router-mock/commit/abafc0754b0014cc92064a913eed876c7e371ba4))
+
+### BREAKING CHANGES
+
+- this module is now ESM only
+
 # [1.1.0](https://github.com/posva/vue-router-mock/compare/v1.0.0...v1.1.0) (2024-02-08)
 
 ### Features
