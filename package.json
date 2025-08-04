@@ -60,8 +60,8 @@
     "tsdown": "^0.13.2",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4",
-    "vue": "^3.4.38",
-    "vue-router": "^4.4.3"
+    "vue": "^3.5.18",
+    "vue-router": "^4.5.1"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
