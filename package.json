@@ -50,7 +50,7 @@
     "conventional-changelog-cli": "^5.0.0",
     "enquirer": "^2.4.1",
     "execa": "^9.6.0",
-    "happy-dom": "^19.0.2",
+    "happy-dom": "^20.0.0",
     "lint-staged": "^16.2.4",
     "minimist": "^1.2.8",
     "prettier": "^3.6.2",
