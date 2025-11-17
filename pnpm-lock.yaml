@@ -12,8 +12,8 @@ importers:
         specifier: ^30.0.0
         version: 30.0.0
       '@types/sinon':
-        specifier: ^17.0.4
-        version: 17.0.4
+        specifier: ^20.0.0
+        version: 20.0.0
       '@vitest/coverage-v8':
         specifier: ^4.0.8
         version: 4.0.8(vitest@4.0.8(happy-dom@20.0.10)(jiti@2.5.1)(yaml@2.8.1))
@@ -573,8 +573,8 @@ packages:
   '@types/semver@7.5.8':
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
 
-  '@types/sinon@17.0.4':
-    resolution: {integrity: sha512-RHnIrhfPO3+tJT0s7cFaXGZvsL4bbR3/k7z3P312qMS4JaS2Tk+KiwiLx1S0rQ56ERj00u1/BtdyVd0FY+Pdew==}
+  '@types/sinon@20.0.0':
+    resolution: {integrity: sha512-etYGUC6IEevDGSWvR9WrECRA01ucR2/Oi9XMBUAdV0g4bLkNf4HlZWGiGlDOq5lgwXRwcV+PSeKgFcW4QzzYOg==}
 
   '@types/sinonjs__fake-timers@8.1.5':
     resolution: {integrity: sha512-mQkU2jY8jJEF7YHjHvsQO8+3ughTL1mcnn96igfhONmR+fUPSKIkefQYpSe8bsly2Ep7oQbn/6VG5/9/0qcArQ==}
@@ -2508,7 +2508,7 @@ snapshots:
 
   '@types/semver@7.5.8': {}
 
-  '@types/sinon@17.0.4':
+  '@types/sinon@20.0.0':
     dependencies:
       '@types/sinonjs__fake-timers': 8.1.5
 
