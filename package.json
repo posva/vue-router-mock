@@ -21,6 +21,7 @@
     "lint": "prettier -c --parser typescript \"{src,__tests__,e2e}/**/*.[jt]s?(x)\"",
     "lint:fix": "pnpm run lint --write",
     "test:types": "tsc --build tsconfig.json",
+    "dev": "vitest",
     "test:unit": "vitest",
     "test": "pnpm run test:types && pnpm run test:unit run --coverage && pnpm run build",
     "prepare": "simple-git-hooks"
