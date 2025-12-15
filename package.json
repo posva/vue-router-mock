@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package",
   "name": "vue-router-mock",
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.25.0",
   "version": "2.0.0",
   "description": "Easily test your components by mocking the router",
   "main": "./dist/index.js",
@@ -58,11 +58,11 @@
     "publie": "^0.0.2",
     "semver": "^7.7.3",
     "simple-git-hooks": "^2.13.1",
-    "tsdown": "^0.17.1",
+    "tsdown": "^0.17.4",
     "typescript": "^5.9.3",
     "vitest": "^4.0.15",
     "vue": "^3.5.25",
-    "vue-router": "^4.6.3"
+    "vue-router": "^4.6.4"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
