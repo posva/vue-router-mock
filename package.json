@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "tsdown",
-    "release": "publie",
+    "release": "node scripts/release.ts",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1",
     "lint": "prettier -c --parser typescript \"{src,__tests__,e2e}/**/*.[jt]s?(x)\"",
     "lint:fix": "pnpm run lint --write",
@@ -43,6 +43,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@posva/prompts": "^2.4.4",
     "@types/jest": "^30.0.0",
     "@types/sinon": "^21.0.0",
     "@vitest/coverage-v8": "^4.0.17",
@@ -55,7 +56,6 @@
     "lint-staged": "^16.2.7",
     "minimist": "^1.2.8",
     "prettier": "^3.8.0",
-    "publie": "^0.0.2",
     "semver": "^7.7.3",
     "simple-git-hooks": "^2.13.1",
     "tsdown": "^0.19.0",
@@ -89,10 +89,7 @@
     "vue": "^3.2.23",
     "vue-router": "^4.0.12 || ^5.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/posva/vue-router-mock.git"
-  },
+  "repository": "posva/vue-router-mock",
   "bugs": {
     "url": "https://github.com/posva/vue-router-mock/issues"
   },
