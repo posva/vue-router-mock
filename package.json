@@ -4,11 +4,12 @@
   "packageManager": "pnpm@10.30.3",
   "version": "2.0.1",
   "description": "Easily test your components by mocking the router",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
   "type": "module",
-  "types": "./dist/index.d.ts",
-  "exports": "./dist/index.js",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
   "sideEffects": false,
   "author": {
     "name": "Eduardo San Martin Morote",
