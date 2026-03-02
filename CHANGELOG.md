@@ -1,3 +1,7 @@
+## [2.0.2](https://github.com/posva/vue-router-mock/compare/v2.0.1...v2.0.2) (2026-03-02)
+
+- add back types
+
 ## [2.0.1](https://github.com/posva/vue-router-mock/compare/v2.0.0...v2.0.1) (2026-02-28)
 
 - Support Vue Router 5
