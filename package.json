@@ -46,7 +46,7 @@
   "devDependencies": {
     "@posva/prompts": "^2.4.4",
     "@types/jest": "^30.0.0",
-    "@types/sinon": "^21.0.1",
+    "@types/sinon": "^22.0.0",
     "@vitest/coverage-v8": "^4.1.9",
     "@vue/test-utils": "^2.4.11",
     "chalk": "^5.6.2",
