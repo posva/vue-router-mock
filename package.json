@@ -51,7 +51,7 @@
     "@vue/test-utils": "^2.4.11",
     "chalk": "^5.6.2",
     "conventional-changelog": "^8.0.1",
-    "conventional-changelog-angular": "^8.3.1",
+    "conventional-changelog-angular": "^9.2.1",
     "enquirer": "^2.4.1",
     "execa": "^9.6.1",
     "happy-dom": "^20.10.6",
