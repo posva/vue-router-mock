@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package",
   "name": "vue-router-mock",
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@11.17.0",
   "version": "2.0.2",
   "description": "Easily test your components by mocking the router",
   "type": "module",
