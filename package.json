@@ -54,7 +54,7 @@
     "conventional-changelog-angular": "^9.4.0",
     "enquirer": "^2.4.1",
     "execa": "^10.1.0",
-    "happy-dom": "^20.14.6",
+    "happy-dom": "^21.0.1",
     "lint-staged": "^17.6.0",
     "minimist": "^1.2.8",
     "prettier": "^3.9.10",
